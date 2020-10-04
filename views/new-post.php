@@ -1,8 +1,8 @@
-<?php 
-include_once("../partials/header.php");
+<?php
+include_once("../views/partials/header.php");
 include_once("../routes/getCategories.php");
 
- ?>
+?>
 
 <!-- HEADER start -->
 <header class="bg-dark text-white py-3">
@@ -22,7 +22,7 @@ include_once("../routes/getCategories.php");
     <div class="row">
         <!--offset é a propriedade que define de onde exatamente o bootstarp começa a contar e separar as colunas -->
         <div class="offset-lg-1 col-lg-10">
-            <form action="../routes/addNewPost.php" method="post">
+            <form action="../routes/addNewPost.php" method="post" enctype="multipart/form-data">
                 <div class="card ">
                     <div class="card-header bg-white text-dark">
                         <h2>Preencha os dados necessários.</h2>
@@ -31,17 +31,16 @@ include_once("../routes/getCategories.php");
                         <div class="form-group">
                             <div class="row mb-4">
                                 <div class="col-6 ">
-
                                     <label for="title" class="text-white">Título da postagem</label>
                                     <input class="form-control" type="text" name="title" id="title" placeholder="Digite o título da postagem">
                                 </div>
-
                                 <div class="col-6">
-
                                     <label for="category" class="text-white">Escolha uma categoria</label>
-                                    <select class="form-control" type="text" name="category" id="author" placeholder="Digite o nome da categoria desejada">
-                                    <?php foreach($categories as $category): ?>
-                                        <option value=<?php echo $category['name']?>><?php echo $category['name']?></option>    
+                                    <select class="form-control" type="text" name="category" id="category" placeholder="Digite o nome da categoria desejada">
+                                        <?php foreach ($categories as $category) : ?>
+                                            <option value=<?php echo $category['name'] ?>>
+                                                <?php echo $category['name'] ?>
+                                            </option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -79,4 +78,4 @@ include_once("../routes/getCategories.php");
 </section>
 
 
-<?php include_once("../partials/footer.php") ?>
+<?php include_once("../views/partials/footer.php") ?>

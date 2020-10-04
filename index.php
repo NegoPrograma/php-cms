@@ -1,4 +1,4 @@
-<?php include_once("./partials/header.php")?>
+<?php include_once("./views/partials/header.php")?>
 
 
 <!-- CONTENT -->
@@ -18,4 +18,4 @@ logo após vem um hifén e o valor do padding desejado. -->
     <!-- HEADER end -->
 
 <!-- END CONTENT -->
-<?php include_once("./partials/footer.php")?>
+<?php include_once("./views/partials/footer.php")?>
