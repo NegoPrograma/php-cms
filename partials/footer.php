@@ -1,5 +1,7 @@
-<footer class="bg-dark text-white fixed-bottom">
-    <div class="container">
+
+
+<footer class="footer bg-dark text-white fixed-bottom">
+    <div class="container ">
         <div class="row">
             <div class="col-12">
                 <p class="lead text-center">Todos os direitos reservados. <span id="year"></span></p>

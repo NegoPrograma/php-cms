@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1><span class="fa fa-edit"></span>Configurar suas categorias.</h1>
+                <h1><span class="fa fa-edit"></span>  Adicionar nova categoria.</h1>
             </div>
         </div>
     </div>
@@ -22,19 +22,19 @@
             <form action="../routes/addCategory.php" method="post">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
-                        <h2>Adicionar categoria nova</h2>
+                        <h2>Preencha os dados necessários.</h2>
                     </div>
                     <div class="card-body bg-primary">
                         <div class="form-group">
-                            <label for="title">Nome da categoria</label>
+                            <label for="title" class="text-white">Nome da categoria</label>
                             <input class="form-control" type="text" name="category_name" id="title" placeholder="Digite o nome da nova categoria">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a class="btn btn-warning btn-block my-3" href="/php-cms/views/dashboard.php"><span class="fa fa-arrow-left"></span>Voltar ao quadro adminstrativo</a>
+                                    <a class="btn btn-warning btn-block mt-3" href="/php-cms/views/dashboard.php"><span class="fa fa-arrow-left"></span>Voltar ao quadro adminstrativo</a>
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <button class="btn btn-success btn-block mb-3 " type="submit"><span class="fa fa-check"></span>Salvar</a>
+                                    <button class="btn btn-success btn-block mt-3 " type="submit"><span class="fa fa-check"></span>Salvar</a>
                                 </div>
                             </div>
                         </div>

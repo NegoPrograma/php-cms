@@ -25,7 +25,7 @@
             <a href="/php-cms/views/dashboard.php" class="nav-link">Quadro Adminstrativo</a>
         </li>
         <li class="nav-item">
-            <a href="/php-cms/views/posts.php" class="nav-link">Posts</a>
+            <a href="/php-cms/views/new-post.php" class="nav-link">Posts</a>
         </li>
         <li class="nav-item">
             <a href="/php-cms/views/categories.php" class="nav-link">Categorias</a>

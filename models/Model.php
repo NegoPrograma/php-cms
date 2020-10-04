@@ -2,12 +2,11 @@
 
 include_once("../utils/db-credentials.php");
 
-use \PDO;
 
 class Model
 {
 
-    protected $db;
+    protected PDO $db;
     function __construct()
     {
         $this->initDatabase();

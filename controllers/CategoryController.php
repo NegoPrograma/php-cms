@@ -12,31 +12,40 @@ class CategoryController
     function __construct($categoryName)
     {
         $this->validInput = true;
-        $this->categoryModel = new Category();
         $this->categoryName = $categoryName;
     }
 
     function setCategory()
     {
         if ($this->validInput) {
+            $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
             $mockAuthor = "Isaac";
-            $this->categoryModel->setCategory($mockAuthor);
+            $this->categoryModel = new Category($mockAuthor,$this->categoryName);
+            $result = $this->categoryModel->setCategory();
+            if($result){
+                $errorHandler->addMessage("Categoria salva com successo.");
+            }else{
+                $errorHandler->addMessage("Erro ao salvar dados, tente novamente.");
+                $errorHandler->setSuccess(false);
+            }
+            $errorHandler->renderResult();
         }
     }
 
     function validateCategory()
     {
-        $result = new OperationResult($_SERVER['HTTP_REFERER']);
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if (empty($this->categoryName))
-            $result->addMessage("Não é permitido uma categoria sem nome.");
+            $errorHandler->addMessage("Não é permitido uma categoria sem nome.");
 
         if (strlen($this->categoryName) < 3 || strlen($this->categoryName) > 49)
-            $result->addMessage("O nome da categoria deve conter de 3 até o máximo de 50 caractéres");
+            $errorHandler->addMessage("O nome da categoria deve conter de 3 até o máximo de 50 caractéres");
 
-        if (count($result->getMessages()) > 0) {
-            $result->setSuccess(false);
+        if (count($errorHandler->getMessages()) > 0) {
+            $errorHandler->setSuccess(false);
             $this->validInput = false;
+            $errorHandler->renderResult();
         }
-        $result->renderResult();
+        
     }
 }
