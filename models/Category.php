@@ -7,13 +7,19 @@ class Category extends Model
 
     private $authorName;
     private $categoryName;
-    function __construct($authorName, $categoryName)
+    function __construct($authorName = "", $categoryName = "")
     {
         parent::__construct();
         $this->authorName = $authorName;
         $this->categoryName = $categoryName;
     }
 
+    public function getCategories(){
+        $query = "SELECT * FROM categories";
+        $result = $this->db->query($query);
+        return $result->fetchAll();
+    }
+    
     public function setCategory()
     {
         date_default_timezone_set("America/Sao_Paulo");

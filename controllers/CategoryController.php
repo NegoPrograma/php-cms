@@ -9,13 +9,18 @@ class CategoryController
     private $categoryName;
     private $validInput;
 
-    function __construct($categoryName)
+    function __construct($categoryName = "")
     {
         $this->validInput = true;
         $this->categoryName = $categoryName;
     }
 
-    function setCategory()
+    public function getCategories(){
+        $this->categoryModel = new Category();
+        return $this->categoryModel->getCategories();
+    }
+
+    public function setCategory()
     {
         if ($this->validInput) {
             $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);

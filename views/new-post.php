@@ -1,4 +1,8 @@
-<?php include_once("../partials/header.php") ?>
+<?php 
+include_once("../partials/header.php");
+include_once("../routes/getCategories.php");
+
+ ?>
 
 <!-- HEADER start -->
 <header class="bg-dark text-white py-3">
@@ -36,10 +40,9 @@
 
                                     <label for="category" class="text-white">Escolha uma categoria</label>
                                     <select class="form-control" type="text" name="category" id="author" placeholder="Digite o nome da categoria desejada">
-                                        <option value="1">2</option>
-                                        <option value="1">2</option>
-                                        <option value="1">2</option>
-                                        <option value="1">2</option>
+                                    <?php foreach($categories as $category): ?>
+                                        <option value=<?php echo $category['name']?>><?php echo $category['name']?></option>    
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </div>
