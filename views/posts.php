@@ -49,7 +49,7 @@ include_once("../routes/getPosts.php");
                     <?php foreach ($posts as $post) : ?>
                         <tr>
                             <td>#</td>
-                            <td><?php echo $post['title'] ?></td>
+                            <td><?php echo substr($post['title'],0,15) . "..." ?></td>
                             <td><?php echo $post['category'] ?></td>
                             <td><?php echo $post['datetime'] ?></td>
                             <td><?php echo $post['author'] ?></td>

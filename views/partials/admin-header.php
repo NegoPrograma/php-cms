@@ -28,16 +28,16 @@
             <a href="/php-cms/views/posts.php" class="nav-link">Posts</a>
         </li>
         <li class="nav-item">
-            <a href="/php-cms/views/categories.php" class="nav-link">Categorias</a>
-        </li>
-        <li class="nav-item">
             <a href="/php-cms/views/admins.php" class="nav-link">Adminstradores</a>
         </li>
         <li class="nav-item">
             <a href="/php-cms/views/comments.php" class="nav-link">Comentários</a>
         </li>
-        <li class="nav-item ml-auto"><a href="/php-cms/views/logout.php" class="nav-link text-danger"><i class="fa fa-user-times "></i>logout</a></li>
+        
     </ul>
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item ml-auto"><a href="/php-cms/views/logout.php" class="nav-link text-danger"><i class="fa fa-user-times "></i>logout</a></li>
+        </ul>
     </nav>
     <!--Navbar ended.-->
 
