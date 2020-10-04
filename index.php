@@ -17,6 +17,5 @@ logo após vem um hifén e o valor do padding desejado. -->
     </header>
     <!-- HEADER end -->
 
-
 <!-- END CONTENT -->
 <?php include_once("./partials/footer.php")?>

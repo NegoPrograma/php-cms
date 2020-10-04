@@ -19,7 +19,7 @@
     <div class="row">
         <!--offset é a propriedade que define de onde exatamente o bootstarp começa a contar e separar as colunas -->
         <div class="offset-lg-1 col-lg-10">
-            <form action="../controllers/CategoryController" method="post">
+            <form action="../routes/addCategory.php" method="post">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         <h2>Adicionar categoria nova</h2>
