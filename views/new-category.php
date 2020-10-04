@@ -1,4 +1,4 @@
-<?php include_once("../views/partials/header.php") ?>
+<?php include_once("partials/header.php") ?>
 
 
 <!-- CONTENT -->
@@ -11,7 +11,6 @@
             </div>
         </div>
     </div>
-
 </header>
 <!-- HEADER end -->
 
@@ -46,4 +45,4 @@
 </section>
 
 <!-- END CONTENT -->
-<?php include_once("../views/partials/footer.php") ?>
+<?php include_once("partials/footer.php") ?>

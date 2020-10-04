@@ -1,5 +1,5 @@
 <?php
-include_once("../views/partials/header.php");
+include_once("partials/header.php");
 include_once("../routes/getCategories.php");
 
 ?>
@@ -78,4 +78,4 @@ include_once("../routes/getCategories.php");
 </section>
 
 
-<?php include_once("../views/partials/footer.php") ?>
+<?php include_once("partials/footer.php") ?>

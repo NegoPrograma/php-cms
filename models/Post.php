@@ -13,7 +13,7 @@ class Post extends Model
     private $imagePath;
 
 
-    function __construct($authorName = "", $categoryName = "", $postTitle = "", $postContent = "", $postImage)
+    function __construct($authorName = "", $categoryName = "", $postTitle = "", $postContent = "", $postImage = "")
     {
         parent::__construct();
         $this->authorName = $authorName;
@@ -27,7 +27,7 @@ class Post extends Model
 
     public function getPosts()
     {
-        $query = "SELECT * FROM categories";
+        $query = "SELECT * FROM posts";
         $result = $this->db->query($query);
         return $result->fetchAll();
     }

@@ -11,7 +11,7 @@ class PostController
     private $postContent;
     private $postCategory;
     private $validInput;
-    
+
 
     function __construct($postTitle = "", $postContent = "", $postCategory = "", $postImage = "")
     {
@@ -33,7 +33,7 @@ class PostController
         if ($this->validInput) {
             $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
             $mockAuthor = "Isaac";
-            $this->postModel = new Post($mockAuthor, $this->postCategory,$this->postTitle,$this->postContent,$this->postImage);
+            $this->postModel = new Post($mockAuthor, $this->postCategory, $this->postTitle, $this->postContent, $this->postImage);
             $result = $this->postModel->addPost();
             if ($result) {
                 $errorHandler->addMessage("Nova postagem salva com successo.");
