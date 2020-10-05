@@ -23,9 +23,10 @@ class Post extends ModelTemplate
         $this->categoryName = $categoryName;
         $this->postContent = $postContent;
         $this->postTitle = $postTitle;
-        $this->postImage = $postImage;
-
-        $this->imagePath = "../uploads/" . basename($postImage);
+        if($postImage != ""){
+            $this->postImage = time().$postImage;
+            $this->imagePath = "../uploads/". $this->postImage;
+        }
     }
 
     public function getPost($id)
@@ -93,11 +94,22 @@ class Post extends ModelTemplate
 
     public function deletePost($id)
     {
+        //pegando o nome da imagem para deletar da pasta de uploads antes de deletar o post em si.
+        $query = "SELECT * FROM posts WHERE id = :id";
+        $result =  $this->db->prepare($query);
+        $result->bindValue(":id",$id);
+         $result->execute();
+        $imagePath = "../uploads/". $result->fetch()["image"];
+
         $query =
             "DELETE FROM posts WHERE id = :id";
         $result = $this->db->prepare($query);
         $result->bindValue(":id", $id);
-        return $result->execute();
+        $result = $result->execute();
+        if($result){
+            unlink($imagePath);
+        }
+        return $result;
     }
 
     public function addPost()
