@@ -4,6 +4,7 @@ namespace Model;
 
 use Model\ModelTemplate;
 use \PDO;
+
 class Post extends ModelTemplate
 {
 
@@ -27,14 +28,48 @@ class Post extends ModelTemplate
         $this->imagePath = "../uploads/" . basename($postImage);
     }
 
-    public function getPost($id){
+    public function getPost($id)
+    {
         $query = "SELECT * FROM posts WHERE id = :id";
         $result = $this->db->prepare($query);
-        $result->bindValue(":id",$id,PDO::PARAM_INT);
+        $result->bindValue(":id", $id, PDO::PARAM_INT);
         $result->execute();
         return $result->fetch();
     }
-
+    public function editPost($id)
+    {
+        if ($this->postImage != "") {
+            $query =
+                    "UPDATE posts 
+                    SET category = :category,
+                    title = :title,
+                    image = :image, 
+                    content = :content 
+                    WHERE id = :id";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $id);
+            $result->bindValue(":category", $this->categoryName);
+            $result->bindValue(":title", $this->postTitle);
+            $result->bindValue(":image", $this->postImage);
+            $result->bindValue(":content", $this->postContent);
+            move_uploaded_file($_FILES['image']['tmp_name'], $this->imagePath);
+        }
+        //caso o usuário queira editar o conteúdo sem trocar o banner.
+        else {
+            $query =    
+                    "UPDATE posts 
+                    SET category = :category,
+                    title = :title,
+                    content = :content 
+                    WHERE id = :id";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $id);
+            $result->bindValue(":category", $this->categoryName);
+            $result->bindValue(":title", $this->postTitle);
+            $result->bindValue(":content", $this->postContent);
+        }
+        return $result->execute();
+    }
     public function getPosts($queryString = "")
     {
         if ($queryString == "") {
@@ -50,12 +85,20 @@ class Post extends ModelTemplate
             ORDER BY id DESC";
             $result = $this->db->prepare($query);
             //porcentagem envolve a querystring para indicar que é uma busca de substring
-            $result->bindValue(":queryString", '%'.$queryString.'%');
+            $result->bindValue(":queryString", '%' . $queryString . '%');
             $result->execute();
         }
         return $result->fetchAll();
     }
 
+    public function deletePost($id)
+    {
+        $query =
+            "DELETE FROM posts WHERE id = :id";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":id", $id);
+        return $result->execute();
+    }
 
     public function addPost()
     {

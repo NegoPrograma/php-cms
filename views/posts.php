@@ -44,7 +44,6 @@ include_once("../routes/getPosts.php");
                     <th>Banner</th>
                     <th>Comentários</th>
                     <th>Ações</th>
-                    <th>Preview</th>
                 </thead>
                 <tbody>
                     <?php foreach ($posts as $post) : ?>
@@ -57,11 +56,12 @@ include_once("../routes/getPosts.php");
                             <td><img class=" post-table-img " src="<?php echo "../uploads/" . $post['image'] ?>" alt="imagem indisponível"></td>
                             <td>Comments</td>
                             <td>
-                                <a href="#" class="btn btn-block  btn-warning">Editar</a>
-                                <a href="#" class="btn btn-block btn-danger">Deletar</a>
+                                <a href="./edit-post.php?id=<?php echo $post['id']?>" class="btn btn-block  btn-warning">Editar</a>
+                                <a href="../routes/deletePost.php?id=<?php echo $post['id']?>" class="btn btn-block btn-danger">Deletar</a>
+                                <a href="./single-post.php?id=<?php echo $post['id']?>" class="btn btn-block btn-primary">Ler post</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-block btn-primary">Preview</a>
+                                
                             </td>
                         </tr>
                     <?php endforeach ?>

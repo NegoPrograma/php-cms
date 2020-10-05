@@ -10,7 +10,7 @@ class OperationResult
     private $success;
     
 
-    public function __construct($previous_link)
+    public function __construct($previous_link = "")
     {
         $this->success = true;
         $this->messages = Array();
