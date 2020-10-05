@@ -3,9 +3,10 @@ include_once("./vendor/autoload.php");
 include_once("./routes/getPosts.php");
 session_start();
 //if (isset($_SESSION['isAdmin']))
-    include_once("views/partials/admin-header.php");
+  //  include_once("views/partials/admin-header.php");
 //else
- //   include_once("views/partials/public-header.php");
+   include_once("views/partials/public-header.php");
+
 
 ?>
 
@@ -33,9 +34,16 @@ logo após vem um hifén e o valor do padding desejado. -->
                 <div class="card my-4">
                     <img class="image-fluid card-img-top post-header-img" src="<?php echo "./uploads/". $post['image']?>" alt="">
                     <div class="card-header ">
-                    <h3 class="card-title "><?php echo $post['title'];?></h4>
+                    
+                    <form class="form-inline"action="./" method="post">
+                <h3 class="card-title ">
+                    <?php echo $post['title'];?> <button class="btn btn-info btn-small" name="query" value="<?php echo $post['category'];?>"><?php echo $post['category'];?></button>
+                </h3>
+                </form>
                         <small class="text-muted">Escrito por <?php echo $post['author'].", ".$post['datetime'].".";?>
+                        
                     </small>
+     
                     <span class="badge post-card-badge">20 comentários</span>
                     </div>
                     <div class="card-body">

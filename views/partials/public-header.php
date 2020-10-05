@@ -33,7 +33,7 @@
         
     </ul>
     <ul class="navbar-nav ml-auto">
-        <form class="form-inline " action="" method="post">
+        <form class="form-inline " action="/php-cms/index.php" method="post">
                 <input type="text" name="query" placeholder="buscar posts" class="form-control">
                 <!--Apenas um dos botões é exibido de acordo com o tamanho da tela. -->
                 <button class="btn btn-warning  d-none d-sm-block" type="submit"><span class="fa fa-search"></span></button>

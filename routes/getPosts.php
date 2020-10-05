@@ -1,6 +1,9 @@
 <?php
 
- Use Controller\PostController;
- $postController = new PostController();
- $posts = $postController->getPosts();
-?>
+use Controller\PostController;
+
+$postController = new PostController();
+if (isset($_POST['query']))
+    $posts = $postController->getPosts($_POST['query']);
+else
+    $posts = $postController->getPosts();

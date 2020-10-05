@@ -25,10 +25,10 @@ class PostController
         $this->postImage = $postImage;
     }
 
-    public function getPosts()
+    public function getPosts($queryString = "")
     {
         $this->postModel = new Post();
-        return $this->postModel->getPosts();
+        return $this->postModel->getPosts($queryString);
     }
 
     public function addPost()

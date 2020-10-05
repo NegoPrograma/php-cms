@@ -1,6 +1,6 @@
 
 
-<footer class="footer bg-dark text-white fixed-bottom">
+<footer class="footer bg-dark text-white ">
     <div class="container ">
         <div class="row">
             <div class="col-12">

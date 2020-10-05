@@ -1,6 +1,8 @@
 <?php
+
 namespace Model;
-Use Model\ModelTemplate;
+
+use Model\ModelTemplate;
 
 class Post extends ModelTemplate
 {
@@ -25,12 +27,27 @@ class Post extends ModelTemplate
         $this->imagePath = "../uploads/" . basename($postImage);
     }
 
-    public function getPosts()
+    public function getPosts($queryString = "")
     {
-        $query = "SELECT * FROM posts ORDER BY id DESC";
-        $result = $this->db->query($query);
+        if ($queryString == "") {
+            $query = "SELECT * FROM posts ORDER BY id DESC";
+            $result = $this->db->query($query);
+        } else {
+            $query = "SELECT * FROM posts WHERE 
+            datetime LIKE :queryString OR 
+            category LIKE :queryString OR 
+            content LIKE :queryString OR 
+            title LIKE :queryString OR 
+            author LIKE :queryString  
+            ORDER BY id DESC";
+            $result = $this->db->prepare($query);
+            //porcentagem envolve a querystring para indicar que é uma busca de substring
+            $result->bindValue(":queryString", '%'.$queryString.'%');
+            $result->execute();
+        }
         return $result->fetchAll();
     }
+
 
     public function addPost()
     {
