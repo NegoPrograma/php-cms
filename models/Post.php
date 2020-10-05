@@ -3,7 +3,7 @@
 namespace Model;
 
 use Model\ModelTemplate;
-
+use \PDO;
 class Post extends ModelTemplate
 {
 
@@ -25,6 +25,14 @@ class Post extends ModelTemplate
         $this->postImage = $postImage;
 
         $this->imagePath = "../uploads/" . basename($postImage);
+    }
+
+    public function getPost($id){
+        $query = "SELECT * FROM posts WHERE id = :id";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":id",$id,PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetch();
     }
 
     public function getPosts($queryString = "")

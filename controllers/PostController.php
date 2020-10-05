@@ -24,7 +24,18 @@ class PostController
         $this->postCategory = $postCategory;
         $this->postImage = $postImage;
     }
+    public function getPost($id = ""){
+        if($id == ""){
+            $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+            $errorHandler->setSuccess(false);
+            $errorHandler->addMessage("Post não encontrado, verifique se os dados estão de acordo.");
+            $errorHandler->renderResult();
+        }else {
+            $this->postModel = new Post();
+            return $this->postModel->getPost($id);
+        }
 
+    }
     public function getPosts($queryString = "")
     {
         $this->postModel = new Post();
