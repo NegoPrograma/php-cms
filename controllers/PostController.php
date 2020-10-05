@@ -1,6 +1,9 @@
 <?php
-include_once("../models/Post.php");
-include_once('../utils/OperationResult.php');
+namespace Controller;
+
+Use Model\Post;
+Use Utils\OperationResult;
+
 class PostController
 {
 

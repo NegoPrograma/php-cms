@@ -1,8 +1,8 @@
 <?php
 
-include_once("../utils/db-credentials.php");
-include_once("../models/Model.php");
-class Category extends Model
+namespace Model;
+Use Model\ModelTemplate;
+class Category extends ModelTemplate
 {
 
     private $authorName;

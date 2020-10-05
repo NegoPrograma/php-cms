@@ -1,6 +1,8 @@
 <?php
-include_once("../models/Category.php");
-include_once('../utils/OperationResult.php');
+
+namespace Controller;
+Use Utils\OperationResult;
+Use Model\Category;
 class CategoryController
 {
 

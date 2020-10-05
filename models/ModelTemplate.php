@@ -1,9 +1,12 @@
 <?php
 
-include_once("../utils/db-credentials.php");
+namespace Model;
 
+use Utils\DBConfig;
+use \PDO;
+use \PDOException;
 
-class Model
+class ModelTemplate
 {
 
     protected PDO $db;
@@ -14,7 +17,11 @@ class Model
 
     private function initDatabase()
     {
-        global $dbHost, $dbName, $dbUsername, $dbPass;
+        $dsn = DBConfig::getDSN();
+        $dbHost = $dsn['dbHost'];
+        $dbName = $dsn['dbName'];
+        $dbUsername = $dsn['dbUsername'];
+        $dbPass = $dsn['dbPass'];
         try {
             //configurando o DSN para conexão ao banco.
             $this->db = new PDO(

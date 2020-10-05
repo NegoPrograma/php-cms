@@ -1,8 +1,8 @@
 <?php
+namespace Model;
+Use Model\ModelTemplate;
 
-include_once("../utils/db-credentials.php");
-include_once("../models/Model.php");
-class Post extends Model
+class Post extends ModelTemplate
 {
 
     private $authorName;
@@ -51,7 +51,7 @@ class Post extends Model
         $stmt->bindValue(":date", $date);
         $stmt->bindValue(":image", $image);
         $result = $stmt->execute();
-            move_uploaded_file($_FILES['image']['tmp_name'],$this->imagePath);
+        move_uploaded_file($_FILES['image']['tmp_name'], $this->imagePath);
         return $result;
     }
 }

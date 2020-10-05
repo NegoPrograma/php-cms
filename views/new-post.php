@@ -1,6 +1,7 @@
 <?php
-include_once("partials/header.php");
-include_once("../routes/getCategories.php");
+include_once("../vendor/autoload.php");
+include_once("partials/admin-header.php");
+include_once realpath("../routes/getCategories.php");
 
 ?>
 

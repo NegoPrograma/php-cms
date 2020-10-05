@@ -1,6 +1,7 @@
 <?php
-include_once("partials/header.php");
-include_once("../routes/getPosts.php"); 
+include_once("../vendor/autoload.php");
+include_once("./partials/admin-header.php");
+include_once("../routes/getPosts.php");
 ?>
 <!--CONTENT-->
 <!-- HEADER start -->
@@ -72,4 +73,4 @@ include_once("../routes/getPosts.php");
 
 
 <!--CONTENT END-->
-<?php include_once("partials/footer.php") ?>
+<?php include_once("./partials/footer.php") ?>

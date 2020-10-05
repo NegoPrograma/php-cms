@@ -1,4 +1,5 @@
-<?php include_once("partials/header.php") ?>
+<?php include_once("partials/admin-header.php") ;
+include_once("../vendor/autoload.php");?>
 
 
 <!-- CONTENT -->
