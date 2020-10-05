@@ -27,7 +27,7 @@ class Post extends ModelTemplate
 
     public function getPosts()
     {
-        $query = "SELECT * FROM posts";
+        $query = "SELECT * FROM posts ORDER BY id DESC";
         $result = $this->db->query($query);
         return $result->fetchAll();
     }

@@ -2,10 +2,10 @@
 include_once("./vendor/autoload.php");
 include_once("./routes/getPosts.php");
 session_start();
-if (isset($_SESSION['isAdmin']))
+//if (isset($_SESSION['isAdmin']))
     include_once("views/partials/admin-header.php");
-else
-    include_once("views/partials/public-header.php");
+//else
+ //   include_once("views/partials/public-header.php");
 
 ?>
 
@@ -31,11 +31,16 @@ logo após vem um hifén e o valor do padding desejado. -->
         <div class="col-sm-8 ">
             <?php foreach($posts as $post): ?>
                 <div class="card my-4">
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $post['title'];?></h4>
-                        <small>Escrito por <?php echo $post['author'].", ".$post['datetime'].".";?>
+                    <img class="image-fluid card-img-top post-header-img" src="<?php echo "./uploads/". $post['image']?>" alt="">
+                    <div class="card-header ">
+                    <h3 class="card-title "><?php echo $post['title'];?></h4>
+                        <small class="text-muted">Escrito por <?php echo $post['author'].", ".$post['datetime'].".";?>
                     </small>
-                        <hr>
+                    <span class="badge post-card-badge">20 comentários</span>
+                    </div>
+                    <div class="card-body">
+                    <p class="card-text"><?php echo substr($post['content'],0,100)."...";?></p>
+                        <a href="<?php echo './php-cms/views/single-post?post_id='.$post["id"];?>" class="btn btn-warning">Ler mais</a>
                     </div>
                 </div>
             <? endforeach; ?>
