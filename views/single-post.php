@@ -50,13 +50,13 @@ include_once("./partials/public-header.php");
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="text" placeholder="Seu nome" name="reader" class="form-control"  required>
+                            <input type="text" placeholder="Seu nome" name="name" class="form-control"  required>
                         </div>
                         <div class="form-group">
                             <input type="email" placeholder="Seu email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <textarea cols="80" rows="8" name="comment" class="form-control"></textarea>
+                            <textarea cols="80" rows="8" name="comment" class="form-control" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Enviar</button>
                     </div>
