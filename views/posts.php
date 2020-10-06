@@ -1,6 +1,6 @@
 <?php
 include_once("../vendor/autoload.php");
-include_once("./partials/admin-header.php");
+include_once("partials/admin-header.php");
 include_once("../routes/getPosts.php");
 ?>
 <!--CONTENT-->
@@ -20,7 +20,7 @@ include_once("../routes/getPosts.php");
                     <span class="fa fa-plus"></span> Adicionar nova categoria.</a>
             </div>
             <div class="col-lg-3 mt-2">
-                <a href="./new-post.php" class="btn btn-warning btn-block">
+                <a href="./new-admin.php" class="btn btn-warning btn-block">
                     <span class="fa fa-user-plus"></span> Adicionar novo adm.</a>
             </div>
             <div class="col-lg-3 mt-2">
