@@ -1,6 +1,7 @@
 <?php
 include_once("../vendor/autoload.php");
 include_once("../routes/getPost.php");
+include_once("../routes/getComments.php");
 session_start();
 include_once("./partials/public-header.php");
 
@@ -43,6 +44,21 @@ include_once("./partials/public-header.php");
                 </div>
             </div>
 
+            <div class="card my-3">
+                <h3 class="card-header display-6">Comentários</h3>
+                <?php foreach($comments as $comment): ?>
+                <div class="card-body bg-dark">
+                    <div class=" text-white my-2">
+                        <h6 class=" lead"><span class="text-primary">Nome<br></span> <?php echo $comment['name']?></h6>
+                        <p class="small"><span class="text-primary">Data<br></span> <?php echo $comment['datetime']?></p>
+                        <p><span class="text-primary">Comentário<br></span> <?php echo $comment['content']?></p>
+                    </div>
+                </div>
+                <? endforeach;?>
+            </div>
+<!--COMMENT -->
+
+
             <form action="../routes/addComment.php?id=<?php echo $post['id']; ?>" method="post">
                 <div class="card mb-3">
                     <div class="card-header">
@@ -56,12 +72,13 @@ include_once("./partials/public-header.php");
                             <input type="email" placeholder="Seu email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <textarea cols="80" rows="8" name="comment" class="form-control" required></textarea>
+                            <textarea placeholder="Comente aqui."cols="80" rows="8" name="comment" class="form-control" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Enviar</button>
                     </div>
                 </div>
             </form>
+            <!--COMMENT END-->
         </div>
         <div class="col-sm-4 ">
 

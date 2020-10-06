@@ -33,30 +33,40 @@ class CommentController
     //         $errorHandler->renderResult();
     //         exit;
     //     } else {
-    //         $this->postModel = new Post();
-    //         $result = $this->postModel->getPost($id);
+    //         $this->commentModel = new Post();
+    //         $result = $this->commentModel->getPost($id);
     //         if (!$result) {
     //             $errorHandler->setSuccess(false);
     //             $errorHandler->addMessage("Post não encontrado, verifique se os dados estão de acordo.");
     //             $errorHandler->renderResult();
     //             exit;
     //         } else {
-    //             return $this->postModel->getPost($id);
+    //             return $this->commentModel->getPost($id);
     //         }
     //     }
     // }
-    // public function getPosts($queryString = "")
-    // {
-    //     $this->postModel = new Post();
-    //     return $this->postModel->getPosts($queryString);
-    // }
 
-    public function addComment()
+    public function getComments($post_id = "")
     {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        if($post_id == ""){
+            $errorHandler->setSuccess(false);
+            $errorHandler->addMessage("Postagem não identificada.");
+            $errorHandler->renderResult();
+            exit;
+        }
+
+        $this->commentModel = new Comment();
+        return $this->commentModel->getComments($post_id);
+    }
+
+    public function addComment($post_id)
+    {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if ($this->validInput) {
-            $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+            
             $postComment = new Comment($this->name, $this->email, $this->content);
-            $result = $postComment->addComment();
+            $result = $postComment->addComment($post_id);
             if ($result) {
                 $errorHandler->addMessage("Comentário salvo com successo, aguarde a aprovação dos admins para sua exibição.");
             } else {
@@ -76,8 +86,8 @@ class CommentController
     //         exit;
     //     } else {
     //         $mockAuthor = "Isaac";
-    //         $this->postModel = new Post($mockAuthor, $this->email, $this->name, $this->content, $this->postImage);
-    //         $result = $this->postModel->editPost($id);
+    //         $this->commentModel = new Post($mockAuthor, $this->email, $this->name, $this->content, $this->postImage);
+    //         $result = $this->commentModel->editPost($id);
     //         if (!$result) {
     //             $errorHandler->setSuccess(false);
     //             $errorHandler->addMessage("Post não encontrado, verifique se os dados estão de acordo.");
@@ -97,8 +107,8 @@ class CommentController
     //         $errorHandler->renderResult();
     //         exit;
     //     } else {
-    //         $this->postModel = new Post();
-    //         $result = $this->postModel->deletePost($id);
+    //         $this->commentModel = new Post();
+    //         $result = $this->commentModel->deletePost($id);
     //         if (!$result) {
     //             $errorHandler->setSuccess(false);
     //             $errorHandler->addMessage("Post não encontrado, verifique se os dados estão de acordo.");
@@ -116,7 +126,8 @@ class CommentController
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if (empty($this->name) || empty($this->email) || empty($this->content))
             $errorHandler->addMessage("Todos os campos devem ser preenchidos.");
-
+        if($id == "")
+            $errorHandler->addMessage("Não foi possível identificar a postagem.");
         if (strlen($this->name) < 3 || strlen($this->name) > 49)
             $errorHandler->addMessage("Seu nome deve conter no mínimo 3 caractéres e no máximo 50.");
 

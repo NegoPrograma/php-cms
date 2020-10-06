@@ -29,25 +29,13 @@ class Comment extends ModelTemplate
         $result->execute();
         return $result->fetch();
     }
-   
-    public function getComments($queryString = "")
+
+    public function getComments($post_id = "")
     {
-        if ($queryString == "") {
-            $query = "SELECT * FROM posts ORDER BY id DESC";
-            $result = $this->db->query($query);
-        } else {
-            $query = "SELECT * FROM posts WHERE 
-            datetime LIKE :queryString OR 
-            email LIKE :queryString OR 
-            content LIKE :queryString OR 
-            title LIKE :queryString OR 
-            name LIKE :queryString  
-            ORDER BY id DESC";
-            $result = $this->db->prepare($query);
-            //porcentagem envolve a querystring para indicar que é uma busca de substring
-            $result->bindValue(":queryString", '%' . $queryString . '%');
-            $result->execute();
-        }
+        $query = "SELECT * FROM comments WHERE post_id = :id AND status = 1 ORDER BY id DESC";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":id",$post_id);
+        $result->execute();
         return $result->fetchAll();
     }
 
@@ -56,35 +44,36 @@ class Comment extends ModelTemplate
         //pegando o nome da imagem para deletar da pasta de uploads antes de deletar o post em si.
         $query = "SELECT * FROM posts WHERE id = :id";
         $result =  $this->db->prepare($query);
-        $result->bindValue(":id",$id);
-         $result->execute();
-        $imagePath = "../uploads/". $result->fetch()["image"];
+        $result->bindValue(":id", $id);
+        $result->execute();
+        $imagePath = "../uploads/" . $result->fetch()["image"];
 
         $query =
             "DELETE FROM posts WHERE id = :id";
         $result = $this->db->prepare($query);
         $result->bindValue(":id", $id);
         $result = $result->execute();
-        if($result){
+        if ($result) {
             unlink($imagePath);
         }
         return $result;
     }
 
-    public function addComment()
+    public function addComment($post_id)
     {
         date_default_timezone_set("America/Sao_Paulo");
         $date = strftime("%d/%m/%Y às %H:%M", time());
         $name = $this->name;
         $email = $this->email;
         $content = $this->content;
-        $query = "INSERT INTO comments(name,content,email,datetime)";
-        $query .= "VALUES(:name,:content,:email,:date)";
+        $query = "INSERT INTO comments(name,content,email,datetime,post_id)";
+        $query .= "VALUES(:name,:content,:email,:date,:post_id)";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(":name", $name);
         $stmt->bindValue(":email", $email);
         $stmt->bindValue(":content", $content);
         $stmt->bindValue(":date", $date);
+        $stmt->bindValue(":post_id", $post_id);
         $result = $stmt->execute();
         return $result;
     }
