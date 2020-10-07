@@ -45,24 +45,31 @@ class Comment extends ModelTemplate
         return $result->fetchAll();
     }
 
+
+    public function approveComment($id)
+    {
+        $query = "UPDATE comments SET status = 1 WHERE id = :id";
+        $result =  $this->db->prepare($query);
+        $result->bindValue(":id", $id);
+        return $result->execute();
+    }
+
+
+    public function disapproveComment($id)
+    {
+        $query = "UPDATE comments SET status = 0 WHERE id = :id";
+        $result =  $this->db->prepare($query);
+        $result->bindValue(":id", $id);
+        return $result->execute();
+    }
+
     public function deleteComment($id)
     {
         //pegando o nome da imagem para deletar da pasta de uploads antes de deletar o post em si.
-        $query = "SELECT * FROM posts WHERE id = :id";
+        $query = "DELETE FROM comments WHERE id = :id";
         $result =  $this->db->prepare($query);
         $result->bindValue(":id", $id);
-        $result->execute();
-        $imagePath = "../uploads/" . $result->fetch()["image"];
-
-        $query =
-            "DELETE FROM posts WHERE id = :id";
-        $result = $this->db->prepare($query);
-        $result->bindValue(":id", $id);
-        $result = $result->execute();
-        if ($result) {
-            unlink($imagePath);
-        }
-        return $result;
+        return $result->execute();
     }
 
     public function addComment($post_id)

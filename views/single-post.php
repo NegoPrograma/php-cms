@@ -40,7 +40,7 @@ else
 
                     </small>
 
-                    <span class="badge post-card-badge">20 comentários</span>
+                    <span class="badge post-card-badge"> Qtd. de comentários: <?php echo count($comments)?></span>
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $post['content']; ?></p>
@@ -52,9 +52,10 @@ else
                 <?php foreach($comments as $comment): ?>
                 <div class="card-body bg-dark">
                     <div class=" text-white my-2">
-                        <h6 class=" lead"><span class="text-primary">Nome<br></span> <?php echo $comment['name']?></h6>
-                        <p class="small"><span class="text-primary">Data<br></span> <?php echo $comment['datetime']?></p>
-                        <p><span class="text-primary">Comentário<br></span> <?php echo $comment['content']?></p>
+                        <div class="row">
+                        <h6 class="lead col-md-12"><?php echo $comment['name']?>,<span class="text-primary small"><?php echo $comment['datetime']?></span></h6>
+                        </div>
+                        <p class="text"> <?php echo $comment['content']?></p>
                     </div>
                 </div>
                 <? endforeach;?>

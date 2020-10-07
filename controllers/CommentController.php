@@ -46,9 +46,50 @@ class CommentController
     //     }
     // }
 
+    public function approveComment($id)
+    {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        if (empty($id)) {
+            $errorHandler->addMessage("Comentário não identificado.");
+            $errorHandler->setSuccess(false);
+        } else {
+            $this->commentModel = new Comment();
+            $result = $this->commentModel->approveComment($id);
+            if ($result) {
+                $errorHandler->addMessage("Comentário aprovado para exibição.");
+            }
+            else{
+                $errorHandler->addMessage("Erro ao salvar dados, favor tentar novamente.");
+                $errorHandler->setSuccess(false); 
+            }
+        }
+        $errorHandler->renderResult();
+    }
+
+    public function deleteComment($id)
+    {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        if (empty($id)) {
+            $errorHandler->addMessage("Comentário não identificado.");
+            $errorHandler->setSuccess(false);
+        } else {
+            $this->commentModel = new Comment();
+            $result = $this->commentModel->deleteComment($id);
+            if ($result) {
+                $errorHandler->addMessage("Comentário deletado.");
+            }
+            else{
+                $errorHandler->addMessage("Erro ao executar operação, favor tentar novamente.");
+                $errorHandler->setSuccess(false); 
+            }
+        }
+        $errorHandler->renderResult();
+    }
+
+
     public function getComments()
     {
-        
+
 
         $this->commentModel = new Comment();
         return $this->commentModel->getComments();
@@ -57,7 +98,7 @@ class CommentController
     public function getCommentsById($post_id = "")
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
-        if($post_id == ""){
+        if ($post_id == "") {
             $errorHandler->setSuccess(false);
             $errorHandler->addMessage("Postagem não identificada.");
             $errorHandler->renderResult();
@@ -72,7 +113,7 @@ class CommentController
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if ($this->validInput) {
-            
+
             $postComment = new Comment($this->name, $this->email, $this->content);
             $result = $postComment->addComment($post_id);
             if ($result) {
@@ -134,7 +175,7 @@ class CommentController
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if (empty($this->name) || empty($this->email) || empty($this->content))
             $errorHandler->addMessage("Todos os campos devem ser preenchidos.");
-        if($id == "")
+        if ($id == "")
             $errorHandler->addMessage("Não foi possível identificar a postagem.");
         if (strlen($this->name) < 3 || strlen($this->name) > 49)
             $errorHandler->addMessage("Seu nome deve conter no mínimo 3 caractéres e no máximo 50.");
