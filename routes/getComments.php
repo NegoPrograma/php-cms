@@ -3,4 +3,8 @@
 use Controller\CommentController;
 
 $commentController = new CommentController();
-$comments = $commentController->getComments($_GET['id']);
+$comments;
+if(isset($_GET['id']))
+    $comments = $commentController->getCommentsById($_GET['id']);
+    else
+    $comments = $commentController->getComments();

@@ -32,10 +32,16 @@ class Comment extends ModelTemplate
 
     public function getComments($post_id = "")
     {
-        $query = "SELECT * FROM comments WHERE post_id = :id AND status = 1 ORDER BY id DESC";
-        $result = $this->db->prepare($query);
-        $result->bindValue(":id",$post_id);
-        $result->execute();
+        $result = null;
+        if ($post_id != "") {
+            $query = "SELECT * FROM comments WHERE post_id = :id AND status = 1 ORDER BY id DESC";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $post_id);
+            $result->execute();
+        } else {
+            $query = "SELECT * FROM comments";
+            $result = $this->db->query($query);
+        }
         return $result->fetchAll();
     }
 

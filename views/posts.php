@@ -63,7 +63,7 @@ else{
                             <td>
                                 <a href="./edit-post.php?id=<?php echo $post['id']?>" class="btn btn-block  btn-warning">Editar</a>
                                 <a href="../routes/deletePost.php?id=<?php echo $post['id']?>" class="btn btn-block btn-danger">Deletar</a>
-                                <a href="./single-post.php?id=<?php echo $post['id']?>" class="btn btn-block btn-primary">Ler post</a>
+                                <a href="./single-post.php?id=<?php echo $post['id']?>" target="_blank" class="btn btn-block btn-primary">Ler post</a>
                             </td>
                             <td>
                                 

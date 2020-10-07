@@ -46,7 +46,15 @@ class CommentController
     //     }
     // }
 
-    public function getComments($post_id = "")
+    public function getComments()
+    {
+        
+
+        $this->commentModel = new Comment();
+        return $this->commentModel->getComments();
+    }
+
+    public function getCommentsById($post_id = "")
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if($post_id == ""){
