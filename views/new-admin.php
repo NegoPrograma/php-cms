@@ -21,7 +21,6 @@ else {
     </div>
 </header>
 <!-- HEADER end -->
-
 <section class="container py-2 mb-4">
     <div class="row">
         <!--offset é a propriedade que define de onde exatamente o bootstarp começa a contar e separar as colunas -->

@@ -19,7 +19,7 @@ class AdminController
 
     function __construct($username = "", $nickname = "", $password = "", $password_confirm = "", $added_by = "")
     {
-        $this->$added_by = $added_by;
+        $this->added_by = $added_by;
         $this->validInput = true;
         $this->username = $username;
         $this->nickname = $nickname;
