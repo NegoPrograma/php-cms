@@ -9,7 +9,7 @@ class AdminController
 {
 
 
-    private $AdminModel;
+    private $adminModel;
     private $username;
     private $password;
     private $password_confirm;
@@ -27,16 +27,17 @@ class AdminController
 
     // public function getCategories()
     // {
-    //     $this->AdminModel = new Admin();
-    //     return $this->AdminModel->getCategories();
+    //     $this->adminModel = new Admin();
+    //     return $this->adminModel->getCategories();
     // }
 
     public function setAdmin()
     {
         if ($this->validInput) {
             $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
-            $this->AdminModel = new Admin($this->username, $this->password,$this->nickname);
-            $result = $this->AdminModel->setAdmin();
+            $this->adminModel = new Admin($this->username, $this->password,$this->nickname);
+            if($this->adminModel)
+            $result = $this->adminModel->setAdmin();
             if ($result) {
                 $errorHandler->addMessage("Adminstrador adicionado com successo.");
             } else {
@@ -50,6 +51,9 @@ class AdminController
     function validateAdmin()
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        $this->adminModel = new Admin();
+        if($this->adminModel->checkDuplicateUsername($this->username))
+        $errorHandler->addMessage("Este nome de usuário já está em uso.");
         if (empty($this->username) || empty($this->password) || empty($this->password_confirm))
             $errorHandler->addMessage("Você não preencheu todos os dados necessários.");
 

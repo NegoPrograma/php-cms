@@ -24,6 +24,14 @@ class Admin extends ModelTemplate
         return $result->fetchAll();
     }
     
+    public function checkDuplicateUsername($username){
+        $query = "SELECT * FROM admins WHERE username = :username";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":username",$username);
+        $result->execute();
+        return $result->rowCount();
+    }
+
     public function setAdmin()
     {
         date_default_timezone_set("America/Sao_Paulo");
