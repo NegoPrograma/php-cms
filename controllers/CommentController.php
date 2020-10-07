@@ -66,6 +66,26 @@ class CommentController
         $errorHandler->renderResult();
     }
 
+    public function disapproveComment($id)
+    {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        if (empty($id)) {
+            $errorHandler->addMessage("Comentário não identificado.");
+            $errorHandler->setSuccess(false);
+        } else {
+            $this->commentModel = new Comment();
+            $result = $this->commentModel->disapproveComment($id);
+            if ($result) {
+                $errorHandler->addMessage("Comentário ocultado.");
+            }
+            else{
+                $errorHandler->addMessage("Erro ao executar operação, favor tentar novamente.");
+                $errorHandler->setSuccess(false); 
+            }
+        }
+        $errorHandler->renderResult();
+    }
+
     public function deleteComment($id)
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);

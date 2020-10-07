@@ -56,6 +56,7 @@ else
                         <h6 class="lead col-md-12"><?php echo $comment['name']?>,<span class="text-primary small"><?php echo $comment['datetime']?></span></h6>
                         </div>
                         <p class="text"> <?php echo $comment['content']?></p>
+                        
                     </div>
                 </div>
                 <? endforeach;?>
