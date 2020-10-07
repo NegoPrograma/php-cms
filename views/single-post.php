@@ -3,7 +3,10 @@ include_once("../vendor/autoload.php");
 include_once("../routes/getPost.php");
 include_once("../routes/getComments.php");
 session_start();
-include_once("./partials/public-header.php");
+if (isset($_SESSION['admin']))
+   include_once("partials/admin-header.php");
+else
+   include_once("partials/public-header.php");
 
 
 ?>
@@ -30,7 +33,7 @@ include_once("./partials/public-header.php");
 
                     <form class="form-inline" action="../" method="post">
                         <h3 class="card-title ">
-                            <?php echo $post['title']; ?> <button class="btn btn-info btn-small" name="query" value="<?php echo $post['category']; ?>"><?php echo $post['category']; ?></button>
+                            <?php echo $post['title']; ?> <button class="btn btn-info btn-small" name="query" value="<?php echo $post['category'];?>"><?php echo $post["category"]; ?></button>
                         </h3>
                     </form>
                     <small class="text-muted">Escrito por <?php echo $post['author'] . ", " . $post['datetime'] . "."; ?>
@@ -89,4 +92,4 @@ include_once("./partials/public-header.php");
 
 <!-- END CONTENT -->
 
-<?php include_once("./partials/footer.php"); ?>
+<?php include_once("partials/footer.php"); ?>

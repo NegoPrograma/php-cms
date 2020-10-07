@@ -15,13 +15,14 @@ class PostController
     private $postContent;
     private $postCategory;
     private $validInput;
+    private $author;
 
-
-    function __construct($postTitle = "", $postContent = "", $postCategory = "", $postImage = "")
+    function __construct($postTitle = "", $postContent = "", $postCategory = "", $postImage = "",$author = "")
     {
         $this->postTitle = $postTitle;
         $this->validInput = true;
         $this->postContent = $postContent;
+        $this->author = $author;
         $this->postCategory = $postCategory;
         $this->postImage = $postImage;
     }
@@ -56,8 +57,7 @@ class PostController
     {
         if ($this->validInput) {
             $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
-            $mockAuthor = "Isaac";
-            $this->postModel = new Post($mockAuthor, $this->postCategory, $this->postTitle, $this->postContent, $this->postImage);
+            $this->postModel = new Post($this->author, $this->postCategory, $this->postTitle, $this->postContent, $this->postImage);
             $result = $this->postModel->addPost();
             if ($result) {
                 $errorHandler->addMessage("Nova postagem salva com successo.");
@@ -77,8 +77,7 @@ class PostController
             $errorHandler->renderResult();
             exit;
         } else {
-            $mockAuthor = "Isaac";
-            $this->postModel = new Post($mockAuthor, $this->postCategory, $this->postTitle, $this->postContent, $this->postImage);
+            $this->postModel = new Post($this->author, $this->postCategory, $this->postTitle, $this->postContent, $this->postImage);
             $result = $this->postModel->editPost($id);
             if (!$result) {
                 $errorHandler->setSuccess(false);

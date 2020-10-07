@@ -23,9 +23,9 @@ class Post extends ModelTemplate
         $this->categoryName = $categoryName;
         $this->postContent = $postContent;
         $this->postTitle = $postTitle;
-        if($postImage != ""){
-            $this->postImage = time().$postImage;
-            $this->imagePath = "../uploads/". $this->postImage;
+        if ($postImage != "") {
+            $this->postImage = time() . $postImage;
+            $this->imagePath = "../uploads/" . $this->postImage;
         }
     }
 
@@ -37,15 +37,17 @@ class Post extends ModelTemplate
         $result->execute();
         return $result->fetch();
     }
+
+    
     public function editPost($id)
     {
         if ($this->postImage != "") {
             $query =
-                    "UPDATE posts 
+                "UPDATE posts 
                     SET category = :category,
                     title = :title,
                     image = :image, 
-                    content = :content 
+                    content = :content, 
                     WHERE id = :id";
             $result = $this->db->prepare($query);
             $result->bindValue(":id", $id);
@@ -57,8 +59,8 @@ class Post extends ModelTemplate
         }
         //caso o usuário queira editar o conteúdo sem trocar o banner.
         else {
-            $query =    
-                    "UPDATE posts 
+            $query =
+                "UPDATE posts 
                     SET category = :category,
                     title = :title,
                     content = :content 
@@ -71,6 +73,7 @@ class Post extends ModelTemplate
         }
         return $result->execute();
     }
+
     public function getPosts($queryString = "")
     {
         if ($queryString == "") {
@@ -97,16 +100,16 @@ class Post extends ModelTemplate
         //pegando o nome da imagem para deletar da pasta de uploads antes de deletar o post em si.
         $query = "SELECT * FROM posts WHERE id = :id";
         $result =  $this->db->prepare($query);
-        $result->bindValue(":id",$id);
-         $result->execute();
-        $imagePath = "../uploads/". $result->fetch()["image"];
+        $result->bindValue(":id", $id);
+        $result->execute();
+        $imagePath = "../uploads/" . $result->fetch()["image"];
 
         $query =
             "DELETE FROM posts WHERE id = :id";
         $result = $this->db->prepare($query);
         $result->bindValue(":id", $id);
         $result = $result->execute();
-        if($result){
+        if ($result) {
             unlink($imagePath);
         }
         return $result;

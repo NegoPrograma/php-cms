@@ -10,10 +10,12 @@ class CategoryController
     private $categoryModel;
     private $categoryName;
     private $validInput;
+    private $author;
 
-    function __construct($categoryName = "")
+    function __construct($author,$categoryName = "")
     {
         $this->validInput = true;
+        $this->author = $author;
         $this->categoryName = $categoryName;
     }
 
@@ -26,8 +28,8 @@ class CategoryController
     {
         if ($this->validInput) {
             $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
-            $mockAuthor = "Isaac";
-            $this->categoryModel = new Category($mockAuthor,$this->categoryName);
+            
+            $this->categoryModel = new Category($this->author,$this->categoryName);
             $result = $this->categoryModel->setCategory();
             if($result){
                 $errorHandler->addMessage("Categoria salva com successo.");

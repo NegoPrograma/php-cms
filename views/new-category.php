@@ -1,4 +1,10 @@
-<?php include_once("partials/admin-header.php") ;
+<?php
+session_start();
+if (isset($_SESSION['admin']))
+    include_once("partials/admin-header.php");
+else {
+    header("location:login.php");
+}
 ?>
 
 
@@ -8,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1><span class="fa fa-edit"></span>  Adicionar nova categoria.</h1>
+                <h1><span class="fa fa-edit"></span> Adicionar nova categoria.</h1>
             </div>
         </div>
     </div>

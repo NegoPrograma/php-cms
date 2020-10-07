@@ -1,4 +1,11 @@
-<?php include_once("partials/admin-header.php");
+<?php
+
+session_start();
+if (isset($_SESSION['admin']))
+    include_once("partials/admin-header.php");
+else {
+    header("location: login.php");
+}
 ?>
 
 

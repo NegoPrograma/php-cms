@@ -1,7 +1,12 @@
 <?php
 include_once("../vendor/autoload.php");
-include_once("partials/admin-header.php");
 include_once("../routes/getPosts.php");
+session_start();
+if (isset($_SESSION['admin']))
+   include_once("partials/admin-header.php");
+else{
+   header("location:login.php");
+}
 ?>
 <!--CONTENT-->
 <!-- HEADER start -->

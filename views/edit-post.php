@@ -1,9 +1,14 @@
 <?php
 include_once("../vendor/autoload.php");
-include_once("partials/admin-header.php");
 include_once("../routes/getCategories.php");
 include_once("../routes/getPost.php");
 
+session_start();
+if (isset($_SESSION['admin']))
+    include_once("partials/admin-header.php");
+else {
+    header("location:login.php");
+}
 ?>
 
 <!-- HEADER start -->
@@ -49,10 +54,10 @@ include_once("../routes/getPost.php");
                             </div>
                             <div class="row my-4">
                                 <div class="col-6 text-white my-auto">
-                                    <h4 class="  text-white">Imagem atual:</h4>
+                                    <h4 class=" text-white">Imagem atual:</h4>
                                 </div>
                                 <div class="col-6">
-                                    <img src="../uploads/<?php echo $post['image'] ?>" alt="">
+                                    <img class=" actual-image"src="../uploads/<?php echo $post['image'] ?>" alt="">
                                 </div>
                             </div>
                             <div class="row px-3 mb-3">

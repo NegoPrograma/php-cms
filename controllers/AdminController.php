@@ -15,9 +15,11 @@ class AdminController
     private $password_confirm;
     private $nickname;
     private $validInput;
+    private $added_by;
 
-    function __construct($username = "", $nickname = "", $password = "", $password_confirm = "")
+    function __construct($username = "", $nickname = "", $password = "", $password_confirm = "", $added_by = "")
     {
+        $this->$added_by = $added_by;
         $this->validInput = true;
         $this->username = $username;
         $this->nickname = $nickname;
@@ -30,24 +32,25 @@ class AdminController
     //     $this->adminModel = new Admin();
     //     return $this->adminModel->getCategories();
     // }
-    public function login(){
-        $this->adminModel = new Admin($this->username,$this->password);
+    public function login()
+    {
+        $this->adminModel = new Admin($this->username, $this->password);
         return $this->adminModel->login();
     }
 
-    public function loginFailed(){
+    public function loginFailed()
+    {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         $errorHandler->setSuccess(false);
         $errorHandler->addMessage("Os dados não estão corretos, favor tentar novamente.");
         $errorHandler->renderResult();
     }
-    
+
     public function setAdmin()
     {
         if ($this->validInput) {
             $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
-            $this->adminModel = new Admin($this->username, $this->password,$this->nickname);
-            if($this->adminModel)
+            $this->adminModel = new Admin($this->username, $this->password, $this->nickname, $this->added_by);
             $result = $this->adminModel->setAdmin();
             if ($result) {
                 $errorHandler->addMessage("Adminstrador adicionado com successo.");
@@ -63,8 +66,10 @@ class AdminController
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         $this->adminModel = new Admin();
-        if($this->adminModel->checkDuplicateUsername($this->username))
-        $errorHandler->addMessage("Este nome de usuário já está em uso.");
+
+        if ($this->adminModel->checkDuplicateUsername($this->username))
+            $errorHandler->addMessage("Este nome de usuário já está em uso.");
+            
         if (empty($this->username) || empty($this->password) || empty($this->password_confirm))
             $errorHandler->addMessage("Você não preencheu todos os dados necessários.");
 

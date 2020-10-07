@@ -1,8 +1,8 @@
 <?php
 include_once("../vendor/autoload.php");
 session_start();
-//if (isset($_SESSION['isAdmin']))
-//  include_once("views/partials/admin-header.php");
+if (isset($_SESSION['admin']))
+    header("location:../index.php");
 //else
 include_once("partials/public-header.php");
 
@@ -16,7 +16,7 @@ logo após vem um hifén e o valor do padding desejado. -->
     <div class="container ">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="display-6">Bem vindo de volta, adminstrador.</h1>
+                <h1 class="display-6">Bem vindo(a) de volta, admin.</h1>
             </div>
         </div>
     </div>

@@ -9,13 +9,15 @@ class Admin extends ModelTemplate
     private $username;
     private $password;
     private $nickname;
+    private $added_by;
 
-    function __construct($username = "", $password = "",$nickname = "")
+    function __construct($username = "", $password = "",$nickname = "",$added_by = "")
     {
         parent::__construct();
         $this->username = $username;
         $this->nickname = $nickname;
         $this->password = $password;
+        $this->added_by = $added_by; 
     }
     public function login(){
         $query = "SELECT * FROM admins WHERE username = :username AND password = :password";
@@ -48,7 +50,7 @@ class Admin extends ModelTemplate
         $username = $this->username;
         $password = md5($this->password);
         $nickname = $this->nickname;
-        $added_by = "Isaac";
+        $added_by = $this->added_by;
         $query = "INSERT INTO admins(username,password,datetime,nickname,addedby)";
         $query .= " VALUES(:username,:password,:date,:nickname,:added_by)";
         $stmt = $this->db->prepare($query);

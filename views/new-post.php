@@ -1,7 +1,12 @@
 <?php
 include_once("../vendor/autoload.php");
-include_once("partials/admin-header.php");
 include_once realpath("../routes/getCategories.php");
+session_start();
+if (isset($_SESSION['admin']))
+    include_once("partials/admin-header.php");
+else {
+    header("location:login.php");
+}
 
 ?>
 
@@ -39,7 +44,7 @@ include_once realpath("../routes/getCategories.php");
                                     <label for="category" class="text-white">Escolha uma categoria</label>
                                     <select class="form-control" type="text" name="category" id="category" placeholder="Digite o nome da categoria desejada">
                                         <?php foreach ($categories as $category) : ?>
-                                            <option value=<?php echo $category['name'] ?>>
+                                            <option value="<?php echo $category['name'] ?>">
                                                 <?php echo $category['name'] ?>
                                             </option>
                                         <?php endforeach ?>
