@@ -27,11 +27,39 @@ class AdminController
         $this->password_confirm = $password_confirm;
     }
 
-    // public function getCategories()
-    // {
-    //     $this->adminModel = new Admin();
-    //     return $this->adminModel->getCategories();
-    // }
+    public function deleteAdmin($id, $adminUsername)
+    {
+
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        $this->adminModel = new Admin();
+        if ($id == "") {
+            $errorHandler->setSuccess(false);
+            $errorHandler->addMessage("admin não identificável, faltam parâmetros.");
+            $errorHandler->renderResult();
+        }
+        //você só pode deletar admins que VOCÊ mesmo registrou.
+        else if (!$this->adminModel->hasRegistered($id, $adminUsername)) {
+            $errorHandler->setSuccess(false);
+            $errorHandler->addMessage("Operação negada, você não registrou este adminstrador para poder retirar o mesmo.");
+            $errorHandler->renderResult();
+        } else {
+
+            $result = $this->adminModel->deleteAdmin($id);
+            if (!$result) {
+                $errorHandler->setSuccess(false);
+                $errorHandler->addMessage("admin não encontrado, verifique se os dados estão de acordo.");
+                $errorHandler->renderResult();
+            } else {
+                $errorHandler->addMessage("admin deletado com sucesso.");
+                $errorHandler->renderResult();
+            }
+        }
+    }
+    public function getAdmins()
+    {
+        $this->adminModel = new Admin();
+        return $this->adminModel->getAdmins();
+    }
     public function login()
     {
         $this->adminModel = new Admin($this->username, $this->password);
@@ -69,7 +97,7 @@ class AdminController
 
         if ($this->adminModel->checkDuplicateUsername($this->username))
             $errorHandler->addMessage("Este nome de usuário já está em uso.");
-            
+
         if (empty($this->username) || empty($this->password) || empty($this->password_confirm))
             $errorHandler->addMessage("Você não preencheu todos os dados necessários.");
 

@@ -25,7 +25,7 @@ else{
                     <span class="fa fa-plus"></span> Nova categoria.</a>
             </div>
             <div class="col-lg-3 mt-2">
-                <a href="./new-admin.php" class="btn btn-warning btn-block">
+                <a href="./admins.php" class="btn btn-warning btn-block">
                     <span class="fa fa-user-plus"></span> Adicionar novo adm.</a>
             </div>
             <div class="col-lg-3 mt-2">

@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+include_once("../vendor/autoload.php");
+include_once("../routes/getAdmins.php");
 if (isset($_SESSION['admin']))
     include_once("partials/admin-header.php");
 else {
@@ -67,6 +69,35 @@ else {
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="offset-lg-1 col-lg-10">
+            <h2>Categorias existentes:</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                    <th>Nome de usuário</th>
+                    <th>Data de adição</th>
+                    <th>Nickname</th>
+                    <th>Adicionado por</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+
+                <?php foreach($admins as $admin): ?>
+                    <tr>
+                        <td><?php echo substr($admin['username'],0,15)."...";?></td>
+                        <td><?php echo $admin['datetime']?></td>
+                        <td><?php echo substr($admin['nickname'],0,20)."..";?></td>
+                        <td><?php echo substr($admin['addedby'],0,20)."..";?></td>
+                        <td>
+                                <a href="../routes/deleteAdmin.php?id=<?php echo $admin['id']?>" class="btn btn-block btn-danger">Banir</a>
+                            </td>
+                    </tr>
+                <? endforeach;?>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
