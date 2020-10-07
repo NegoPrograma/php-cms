@@ -6,13 +6,16 @@ Use Model\ModelTemplate;
 class Admin extends ModelTemplate
 {
 
-    private $authorName;
-    private $adminName;
-    function __construct($authorName = "", $adminName = "")
+    private $username;
+    private $password;
+    private $nickname;
+
+    function __construct($username = "", $password = "",$nickname = "")
     {
         parent::__construct();
-        $this->authorName = $authorName;
-        $this->adminName = $adminName;
+        $this->username = $username;
+        $this->nickname = $nickname;
+        $this->password = $password;
     }
 
     public function getAdmins(){
@@ -25,14 +28,18 @@ class Admin extends ModelTemplate
     {
         date_default_timezone_set("America/Sao_Paulo");
         $date = strftime("%d/%m/%Y às %H:%M", time());
-        $author = $this->authorName;
-        $admin = $this->adminName;
-        $query = "INSERT INTO admins(author,name,datetime)";
-        $query .= "VALUES(:author,:admin,:date)";
+        $username = $this->username;
+        $password = md5($this->password);
+        $nickname = $this->nickname;
+        $added_by = "Isaac";
+        $query = "INSERT INTO admins(username,password,datetime,nickname,addedby)";
+        $query .= " VALUES(:username,:password,:date,:nickname,:added_by)";
         $stmt = $this->db->prepare($query);
-        $stmt->bindValue(":author", $author);
-        $stmt->bindValue(":admin", $admin);
+        $stmt->bindValue(":username", $username);
+        $stmt->bindValue(":password", $password);
         $stmt->bindValue(":date", $date);
+        $stmt->bindValue(":nickname", $nickname);
+        $stmt->bindValue(":added_by", $added_by);
 
         $result = $stmt->execute();
        return $result;

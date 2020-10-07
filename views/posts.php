@@ -13,11 +13,11 @@ include_once("../routes/getPosts.php");
             </div>
             <div class="col-lg-3 mt-2">
                 <a href="./new-post.php" class="btn btn-primary btn-block">
-                    <span class="fa fa-edit"></span> Fazer nova postagem.</a>
+                    <span class="fa fa-edit"></span> Nova postagem.</a>
             </div>
             <div class="col-lg-3 mt-2">
                 <a href="./new-category.php" class="btn btn-info btn-block">
-                    <span class="fa fa-plus"></span> Adicionar nova categoria.</a>
+                    <span class="fa fa-plus"></span> Nova categoria.</a>
             </div>
             <div class="col-lg-3 mt-2">
                 <a href="./new-admin.php" class="btn btn-warning btn-block">

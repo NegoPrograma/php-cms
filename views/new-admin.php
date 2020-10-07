@@ -19,7 +19,7 @@
     <div class="row">
         <!--offset é a propriedade que define de onde exatamente o bootstarp começa a contar e separar as colunas -->
         <div class="offset-lg-1 col-lg-10">
-            <form action="../routes/addCategory.php" method="post">
+            <form action="../routes/addAdmin.php" method="post">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         <h2>Preencha os dados necessários.</h2>
@@ -40,12 +40,12 @@
                             <div class="row my-1">
                                 <div class="col-md-6 mt-1">
                                     <label for="password" class="text-white">Senha</label>
-                                    <input class="form-control" type="text" name="password" id="password" placeholder="Digite sua senha." required>
+                                    <input class="form-control" type="password" name="password" id="password" placeholder="Digite sua senha." required>
                                 </div>
 
                                 <div class="col-md-6 mt-1">
                                     <label for="password-confirm" class="text-white">Confirme sua senha.</label>
-                                    <input class="form-control" type="text" name="password-confirm" id="password-confirm" placeholder="Confirme sua senha." required>
+                                    <input class="form-control" type="password" name="password-confirm" id="password-confirm" placeholder="Confirme sua senha." required>
                                 </div>
                             </div>
                             <div class="row">

@@ -1,8 +1,8 @@
 <?php
 include_once("../vendor/autoload.php");
-Use Controller\PostController;
+Use Controller\AdminController;
 
-$postController = new PostController($_POST['title'],$_POST['content'],$_POST['category'],$_FILES['image']['name']);
-if($postController->validatePost())
-    $postController->addPost();
+$adminController = new AdminController($_POST['username'],$_POST['nickname'],$_POST['password'],$_POST['password-confirm']);
+if($adminController->validateAdmin())
+    $adminController->setAdmin();
 ?>
