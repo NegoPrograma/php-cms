@@ -14,6 +14,16 @@ class Category extends ModelTemplate
         $this->categoryName = $categoryName;
     }
 
+
+    public function deleteCategory($id)
+    {
+        //pegando o nome da imagem para deletar da pasta de uploads antes de deletar o post em si.
+        $query = "DELETE FROM categories WHERE id = :id";
+        $result =  $this->db->prepare($query);
+        $result->bindValue(":id", $id);
+        return $result->execute();
+    }
+
     public function getCategories(){
         $query = "SELECT * FROM categories";
         $result = $this->db->query($query);

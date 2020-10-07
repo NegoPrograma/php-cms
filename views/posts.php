@@ -21,7 +21,7 @@ else{
                     <span class="fa fa-edit"></span> Nova postagem.</a>
             </div>
             <div class="col-lg-3 mt-2">
-                <a href="./new-category.php" class="btn btn-info btn-block">
+                <a href="./categories.php" class="btn btn-info btn-block">
                     <span class="fa fa-plus"></span> Nova categoria.</a>
             </div>
             <div class="col-lg-3 mt-2">
@@ -39,7 +39,7 @@ else{
 <section class="container py-2 mb-4">
     <div class="row">
         <div class="col-lg-12">
-            <table class="table table-hover">
+            <table class="table table-responsive table-hover">
                 <thead class='thead-dark'>
                     <th>#</th>
                     <th>Título</th>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once("../routes/getCategories.php");
 if (isset($_SESSION['admin']))
     include_once("partials/admin-header.php");
 else {
@@ -47,6 +48,33 @@ else {
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="offset-lg-1 col-lg-10">
+            <h2>Categorias existentes:</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                    <th>Autor</th>
+                    <th>Data de criação</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+
+                <?php foreach($categories as $category): ?>
+                    <tr>
+                        <td><?php echo substr($category['author'],0,15)."...";?></td>
+                        <td><?php echo $category['datetime']?></td>
+                        <td><?php echo substr($category['name'],0,20)."..";?></td>
+                        <td>
+                                <a href="../routes/deleteCategory.php?id=<?php echo $category['id']?>" class="btn btn-block btn-danger">Deletar</a>
+                            </td>
+                    </tr>
+                <? endforeach;?>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

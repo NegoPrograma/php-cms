@@ -19,6 +19,26 @@ class CategoryController
         $this->categoryName = $categoryName;
     }
 
+    public function deleteCategory($id){
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        if (empty($id)) {
+            $errorHandler->addMessage("Categoria não identificada.");
+            $errorHandler->setSuccess(false);
+        } else {
+            $this->categoryModel = new Category();
+            $result = $this->categoryModel->deleteCategory($id);
+            if ($result) {
+                $errorHandler->addMessage("Categoria deletada.");
+            }
+            else{
+                $errorHandler->addMessage("Erro ao executar operação, favor tentar novamente.");
+                $errorHandler->setSuccess(false); 
+            }
+        }
+        $errorHandler->renderResult();
+    }
+
+
     public function getCategories(){
         $this->categoryModel = new Category();
         return $this->categoryModel->getCategories();

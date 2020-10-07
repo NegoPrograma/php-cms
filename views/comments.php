@@ -53,7 +53,7 @@ else {
     <div class="row">
         <div class="col-lg-12">
             <h2>Comentários aprovados:</h2>
-            <table class="table">
+            <table class="table ">
                 <thead class="thead-dark">
                     <th>Autor</th>
                     <th>Data de criação</th>
