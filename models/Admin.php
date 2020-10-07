@@ -17,6 +17,15 @@ class Admin extends ModelTemplate
         $this->nickname = $nickname;
         $this->password = $password;
     }
+    public function login(){
+        $query = "SELECT * FROM admins WHERE username = :username AND password = :password";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":username",$this->username);
+        $result->bindValue(":password",md5($this->password));
+        $result->execute();
+        return $result->fetch();
+    }
+
 
     public function getAdmins(){
         $query = "SELECT * FROM admins";

@@ -30,15 +30,20 @@
         <li class="nav-item">
             <a href="/php-cms/views/features.php" class="nav-link">Features</a>
         </li>
+
         
     </ul>
     <ul class="navbar-nav ml-auto">
-        <form class="form-inline " action="/php-cms/index.php" method="post">
+        <form class="form-inline my-2" action="/php-cms/index.php" method="post">
                 <input type="text" name="query" placeholder="buscar posts" class="form-control">
                 <!--Apenas um dos botões é exibido de acordo com o tamanho da tela. -->
                 <button class="btn btn-warning  d-none d-sm-block" type="submit"><span class="fa fa-search"></span></button>
                 <button class="btn btn-warning  btn-block d-block d-sm-none" type="submit"><span class="fa fa-search"></span></button>
         </form>
+
+        <li class="nav-item m-3">
+            <a href="/php-cms/views/login.php" class="nav-link btn btn-primary btn-block"><span class="fa fa-user"></span>Login</a>
+        </li>
     </ul>
     </nav>
     <!--Navbar ended.-->

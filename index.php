@@ -2,9 +2,9 @@
 include_once("./vendor/autoload.php");
 include_once("./routes/getPosts.php");
 session_start();
-//if (isset($_SESSION['isAdmin']))
-  //  include_once("views/partials/admin-header.php");
-//else
+if (isset($_SESSION['admin']))
+   include_once("views/partials/admin-header.php");
+else
    include_once("views/partials/public-header.php");
 
 

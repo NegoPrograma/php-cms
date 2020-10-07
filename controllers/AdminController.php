@@ -30,7 +30,18 @@ class AdminController
     //     $this->adminModel = new Admin();
     //     return $this->adminModel->getCategories();
     // }
+    public function login(){
+        $this->adminModel = new Admin($this->username,$this->password);
+        return $this->adminModel->login();
+    }
 
+    public function loginFailed(){
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        $errorHandler->setSuccess(false);
+        $errorHandler->addMessage("Os dados não estão corretos, favor tentar novamente.");
+        $errorHandler->renderResult();
+    }
+    
     public function setAdmin()
     {
         if ($this->validInput) {

@@ -27,7 +27,7 @@ logo após vem um hifén e o valor do padding desejado. -->
 <!-- CONTENT -->
 <div class="container col-md-8  push-footer">
     <div class="offset-lg-1 col-lg-10">
-        <form action="../routes/addAdmin.php" method="post">
+        <form action="../routes/login.php" method="post">
             <div class="card">
                 <div class="card-header bg-dark text-white">
                     <h2>Login.</h2>
