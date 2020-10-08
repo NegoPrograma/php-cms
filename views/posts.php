@@ -1,11 +1,12 @@
 <?php
 include_once("../vendor/autoload.php");
 include_once("../routes/getPosts.php");
-session_start();
+if (session_status() != PHP_SESSION_ACTIVE)
+    session_start();
 if (isset($_SESSION['admin']))
-   include_once("partials/admin-header.php");
-else{
-   header("location:login.php");
+    include_once("partials/admin-header.php");
+else {
+    header("location:login.php");
 }
 ?>
 <!--CONTENT-->
@@ -41,7 +42,6 @@ else{
         <div class="col-lg-12">
             <table class="table table-responsive table-hover">
                 <thead class='thead-dark'>
-                    <th>#</th>
                     <th>Título</th>
                     <th>Categoria</th>
                     <th>Data de criação</th>
@@ -53,20 +53,20 @@ else{
                 <tbody>
                     <?php foreach ($posts as $post) : ?>
                         <tr>
-                            <td>#</td>
-                            <td><?php echo substr($post['title'],0,15) . "..." ?></td>
+                            <td><?php echo substr($post['title'], 0, 15) . "..." ?></td>
                             <td><?php echo $post['category'] ?></td>
                             <td><?php echo $post['datetime'] ?></td>
                             <td><?php echo $post['author'] ?></td>
                             <td><img class=" post-table-img " src="<?php echo "../uploads/" . $post['image'] ?>" alt="imagem indisponível"></td>
-                            <td>Comments</td>
-                            <td>
-                                <a href="./edit-post.php?id=<?php echo $post['id']?>" class="btn btn-block  btn-warning">Editar</a>
-                                <a href="../routes/deletePost.php?id=<?php echo $post['id']?>" class="btn btn-block btn-danger">Deletar</a>
-                                <a href="./single-post.php?id=<?php echo $post['id']?>" target="_blank" class="btn btn-block btn-primary">Ler post</a>
+                            <td><span class="badge badge-success">Aprovados: <?php echo $post['approved_comments'] ?></span>
+                                <span class="badge badge-danger">Ocultados: <?php echo $post['unapproved_comments'] ?></span>
                             </td>
                             <td>
-                                
+                                <a href="./edit-post.php?id=<?php echo $post['id'] ?>" class="btn btn-block  btn-warning">Editar</a>
+                                <a href="../routes/deletePost.php?id=<?php echo $post['id'] ?>" class="btn btn-block btn-danger">Deletar</a>
+                                <a href="./single-post.php?id=<?php echo $post['id'] ?>" target="_blank" class="btn btn-block btn-primary">Ler post</a>
+                            </td>
+
                             </td>
                         </tr>
                     <?php endforeach ?>

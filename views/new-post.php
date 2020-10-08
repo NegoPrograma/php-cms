@@ -1,7 +1,9 @@
 <?php
 include_once("../vendor/autoload.php");
 include_once realpath("../routes/getCategories.php");
-session_start();
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
+    
 if (isset($_SESSION['admin']))
     include_once("partials/admin-header.php");
 else {

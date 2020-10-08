@@ -1,12 +1,21 @@
 <?php
+session_start();
 include_once("../vendor/autoload.php");
 include_once("../routes/getPosts.php");
-session_start();
+include_once("../routes/getCategories.php");
+include_once("../routes/getAdmins.php");
+include_once("../routes/getComments.php");
+
 if (isset($_SESSION['admin']))
     include_once("partials/admin-header.php");
 else {
     header("location:login.php");
 }
+
+//em caso de ter menos de 5 postagens existentes.
+$limit = 5;
+if (count($posts) < $limit)
+    $limit = count($posts);
 ?>
 <!--CONTENT-->
 <!-- HEADER start -->
@@ -44,7 +53,7 @@ else {
                     <h1 class="lead">Postagens</h1>
                     <h4 class="display-5">
                         <span class="fa fa-book"></span>
-                        100
+                        <?php echo count($posts) ?>
                     </h4>
                 </div>
             </div>
@@ -53,7 +62,7 @@ else {
                     <h1 class="lead">Categorias</h1>
                     <h4 class="display-5">
                         <span class="fa fa-folder"></span>
-                        100
+                        <?php echo count($categories) ?>
                     </h4>
                 </div>
             </div>
@@ -63,23 +72,59 @@ else {
                     <h1 class="lead">Admins</h1>
                     <h4 class="display-5">
                         <span class="fa fa-users"></span>
-                        100
+                        <?php echo count($admins) ?>
                     </h4>
                 </div>
             </div>
 
 
-        <div class="card text-center bg-dark text-white my-5">
+            <div class="card text-center bg-dark text-white my-5">
                 <div class="card-body">
                     <h1 class="lead">Comentários</h1>
                     <h4 class="display-5">
                         <span class="fa fa-comments"></span>
-                        100
+                        <?php echo count($comments) ?>
                     </h4>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-10">
+
+            <table class="table table-responsive table-hover">
+                <thead class='thead-dark'>
+                    <th>Posts recentes</th>
+                    <th>Título</th>
+                    <th>Categoria</th>
+                    <th>Data de criação</th>
+                    <th>Autor</th>
+                    <th>Banner</th>
+                    <th>Comentários</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+                    <?php for ($i = 0; $i < $limit; $i++) : ?>
+                        <tr>
+                            <td><?php echo $posts[$i]['id'] ?></td>
+                            <td><?php echo substr($posts[$i]['title'], 0, 15) . "..." ?></td>
+                            <td><?php echo $posts[$i]['category'] ?></td>
+                            <td><?php echo $posts[$i]['datetime'] ?></td>
+                            <td><?php echo $posts[$i]['author'] ?></td>
+                            <td><img class=" post-table-img " src="<?php echo "../uploads/" . $posts[$i]['image'] ?>" alt="imagem indisponível"></td>
+                            <td><span class="badge badge-success"><?php echo $posts[$i]['approved_comments']?></span>
+                            <span class="badge badge-danger"><?php echo $posts[$i]['unapproved_comments']?></span></td>
+                            <td>
+                                <a href="./edit-post.php?id=<?php echo $posts[$i]['id'] ?>" class="btn btn-block  btn-warning">Editar</a>
+                                <a href="../routes/deletePost.php?id=<?php echo $posts[$i]['id'] ?>" class="btn btn-block btn-danger">Deletar</a>
+                                <a href="./single-post.php?id=<?php echo $posts[$i]['id'] ?>" target="_blank" class="btn btn-block btn-primary">Ler post</a>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    <?php endfor ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

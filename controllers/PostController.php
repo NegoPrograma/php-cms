@@ -47,6 +47,7 @@ class PostController
             }
         }
     }
+    
     public function getPosts($queryString = "")
     {
         $this->postModel = new Post();

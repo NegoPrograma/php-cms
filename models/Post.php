@@ -38,7 +38,7 @@ class Post extends ModelTemplate
         return $result->fetch();
     }
 
-    
+
     public function editPost($id)
     {
         if ($this->postImage != "") {
@@ -92,7 +92,27 @@ class Post extends ModelTemplate
             $result->bindValue(":queryString", '%' . $queryString . '%');
             $result->execute();
         }
-        return $result->fetchAll();
+        $posts = $result->fetchAll();
+
+        //pegando comentários aprovados e reprovados de um dado post.
+        for ($i = 0; $i < count($posts); $i++) {
+            $query = "SELECT COUNT(*) FROM comments WHERE post_id = :id AND status = 1";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $posts[$i]['id']);
+            $result->execute();
+            $count = $result->fetch();
+            $count =array_shift($count);
+            $posts[$i]['approved_comments'] = $count;
+
+            $query = "SELECT COUNT(*) FROM comments WHERE post_id = :id AND status = 0";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $posts[$i]['id']);
+            $result->execute();
+            $count = $result->fetch();
+            $count =array_shift($count);
+            $posts[$i]['unapproved_comments'] = $count;
+        }
+        return $posts;
     }
 
     public function deletePost($id)
