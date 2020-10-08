@@ -11,6 +11,7 @@ include_once("./vendor/autoload.php");
 include_once("./routes/getPosts.php");
 //paginação do index.
 $totalPostPerPage = 5;
+$page=null;
 $totalPosts = count($posts);
 $totalPages = $totalPosts/$totalPostPerPage;
 if(isset($_GET['page'])){
@@ -24,25 +25,32 @@ if(isset($_GET['page'])){
 
 
 function showPages($page,$totalPages){
-    if($page <= 1 || $page == 2 || $page ){
-        $result  ="<a href=\"./index.php?page=1\">1</a>";
-        $result .=" <a href=\"./index.php?page=2\">2</a> ";
-        $result .=" <a href=\"./index.php?page=3\"> 3</a> ";
-        $result .=" <a href=\"./index.php?page=4\"> 4</a> ";
-        $result .= "<a href=\"./index.php?page=5\">5</a> ";
+    $before = $page-1;
+    $after = $page+1;
+    $min = $page-2;
+    $max = $page+2;
+    $result ="  <a class=\"btn btn-warning  col-sm-1 ml-5 my-2 \" href=\"./index.php?page=$before\"> << </a> ";
+    if($page <= 2){
+        $result  ="<a class=\"btn btn-warning col-sm-1 ml-5 my-2 \" href=\"./index.php?page=1\">1</a>";
+        $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=2\">2</a> ";
+        $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=3\">3</a> ";
+        $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=4\">4</a> ";
+        $result .= "<a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=5\">5</a> ";
     }else if($page > $totalPages){
-        
+            $result = "<h1>Página não existente.</h1>";
+            $result .= "<a class=\"btn btn-warning \" href=\"./index.php?page=1\">Voltar a página inicial.</a>";
+            return $result;
     }else{
-        $min = $page-2;
-        $before = $page-1;
-        $after = $page+1;
-        $max = $page+2;
-        $result  ="<a href=\"./index.php?page=$min\">$min</a>";
-        $result .=" <a href=\"./index.php?page=$before\">$before</a> ";
-        $result .=" <a href=\"./index.php?page=$page\"> $page</a> ";
-        $result .=" <a href=\"./index.php?page=$after\"> $after</a> ";
-        $result .= "<a href=\"./index.php?page=$max\">$max</a> ";
+        $result  .="<a class=\"btn btn-warning col-sm-1 ml-5 mx-1 my-2 \" href=\"./index.php?page=$min\">$min</a>";
+        $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=$before\">$before</a> ";
+        $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=$page\"> $page</a> ";
+        if($page+1 <= $totalPages)
+            $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=$after\"> $after</a> ";
+        if($page+2 <= $totalPages)
+        $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=$max\"> $max</a> ";
     }
+    if($page < $totalPages)
+        $result .=" <a class=\"btn btn-warning col-sm-1 ml-5 my-2 \" href=\"./index.php?page=$after\"> >> </a> ";
     return $result;
 }
 
