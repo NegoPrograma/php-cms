@@ -1,6 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
 
 if (session_status() != PHP_SESSION_ACTIVE)
     session_start();
@@ -11,7 +10,7 @@ else
    include_once("views/partials/public-header.php");
 
 include_once("./vendor/autoload.php");
-
+include_once("./routes/getCategories.php");
 include_once("./routes/getPosts.php");
 //paginação do index.
 $totalPostPerPage = 5;
@@ -21,6 +20,7 @@ $totalPages = $totalPosts/$totalPostPerPage;
 $filter = [];
 if(isset($_POST['query'])){
     $totalPostPerPage = count($posts);
+    
 }
 
 if($totalPostPerPage > $totalPosts){
@@ -118,7 +118,59 @@ logo após vem um hifén e o valor do padding desejado. -->
 
             <?php if(isset($_POST['query'])) echo "<a class=\"btn btn-warning \" href=\"./index.php?page=1\">Voltar a página inicial.</a>";?>
         </div>
+
         <div class="col-sm-4 ">
+                <div class="card mt-4 my-4">
+                    <div class="card-body">
+                        <img src="assets/images/sidebanner.png" alt="" class="d-block img-fluid mb-3">
+                        <div class="text-center">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus non beatae fugiat magnam doloremque quibusdam qui ratione, alias officia, esse placeat vero porro? Adipisci porro minima incidunt omnis, repellat quia.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis corporis similique ab voluptatem unde dicta porro. Voluptatem, impedit possimus, ex nemo, vero asperiores quisquam quaerat enim veniam dolore ducimus? Optio.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae aliquam laborum error nisi, maiores aperiam neque ea vel assumenda? Soluta fugiat suscipit in itaque mollitia quibusdam dolorum dolores, tenetur ea?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui ex hic earum iure tempora perferendis, ullam iste fugit assumenda vitae ipsa odit deleniti consequuntur quod sed dolor magni culpa corrupti?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4 my-4">
+                    <div class="card-header bg-dark text-light">
+                        <h2 class="lead">Faça sua assinatura!</h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-success btn-block text-center text" name="button">Registrar-se</button>
+                        <a  href="views/login.php"><button class="btn mt-3 btn-primary btn-block text-center text" name="button">Login</button></a>
+                    </div>
+
+                <div class="card mt-4">
+                    <div class="card-header bg-dark text-light">
+                        <h2 class="lead">Tags de postagem</h2>
+                        </div>
+                    <div class="card-body">
+                    <?php foreach($categories as $category):?>
+                        <a class="badge badge-primary" href="./views/post-search-by-category.php?page=1&category=<?php echo $category['name'];?>"><?php echo $category['name'];?></a>
+                        <?endforeach;?>
+                    </div>
+                </div>
+
+                <div class="card my-4">
+                    <div class="card-header bg-warning">
+                        <h2 class="lead">Postagens recentes</h2>
+                    </div>
+                    <div class="card-body">
+                        <?php if($recentPosts == []) $recentPosts = $posts;?>
+                    <?php for($i = 0; $i < 5; $i++): ?>
+                <div class="media my-2">
+                    <img src="<?php echo "./uploads/". $recentPosts[$i]['image']?>" alt="" class="d-block img-fluid image-list-limit align-self-start">
+                    <div class="media-body ml-2">
+                        <a href="<?php echo './views/single-post.php?id='.$recentPosts[$i]["id"];?>" target="_blank" class="btn-link" ><? echo $recentPosts[$i]['title']?>, </a>
+                        <small><? echo $recentPosts[$i]['datetime']?></small>
+                    </div>
+                </div>
+                <hr>
+                <?endfor;?>
+                    </div>
+                </div>
 
         </div>
     </div>

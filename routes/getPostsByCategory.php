@@ -3,4 +3,4 @@
 use Controller\PostController;
 
 $postController = new PostController();
-$posts = $postController->getPostsByCategory($_GET['category']);
+$postsByCategory = $postController->getPostsByCategory($_GET['category']);

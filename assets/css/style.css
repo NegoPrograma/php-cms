@@ -36,6 +36,11 @@ a {
 .actual-image{
     max-width: 100%;
 }
+
+.image-list-limit{
+    width: 100px;
+    height: 100px;
+}
 .post-header-img{
     max-width: 100%;
     max-height: 300px;

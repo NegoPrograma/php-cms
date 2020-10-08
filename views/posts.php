@@ -30,7 +30,7 @@ else {
                     <span class="fa fa-user-plus"></span> Adicionar novo adm.</a>
             </div>
             <div class="col-lg-3 mt-2">
-                <a href="./new-post.php" class="btn btn-success btn-block">
+                <a href="./comments.php" class="btn btn-success btn-block">
                     <span class="fa fa-check"></span> Aprovar comentários.</a>
             </div>
         </div>

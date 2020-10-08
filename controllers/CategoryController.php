@@ -12,7 +12,7 @@ class CategoryController
     private $validInput;
     private $author;
 
-    function __construct($author,$categoryName = "")
+    function __construct($author="",$categoryName = "")
     {
         $this->validInput = true;
         $this->author = $author;
@@ -64,6 +64,8 @@ class CategoryController
     function validateCategory()
     {
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        if(empty($this->author))
+            $errorHandler->addMessage("Toda categoria deve ter um autor definido.");
         if (empty($this->categoryName))
             $errorHandler->addMessage("Não é permitido uma categoria sem nome.");
 
