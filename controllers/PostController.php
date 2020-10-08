@@ -54,6 +54,12 @@ class PostController
         return $this->postModel->getPosts($queryString);
     }
 
+    public function getPostsByCategory($category)
+    {
+        $this->postModel = new Post();
+        return $this->postModel->getPostsByCategory($category);
+    }
+
     public function addPost()
     {
         if ($this->validInput) {

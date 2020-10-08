@@ -74,6 +74,37 @@ class Post extends ModelTemplate
         return $result->execute();
     }
 
+
+    public function getPostsByCategory($category)
+    {
+        $query = "SELECT * FROM posts WHERE category = :category ORDER BY id DESC";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":category", $category);
+        $result->execute();
+        $posts = $result->fetchAll();
+
+        //pegando comentários aprovados e reprovados de um dado post.
+        for ($i = 0; $i < count($posts); $i++) {
+            $query = "SELECT COUNT(*) FROM comments WHERE post_id = :id AND status = 1";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $posts[$i]['id']);
+            $result->execute();
+            $count = $result->fetch();
+            $count = array_shift($count);
+            $posts[$i]['approved_comments'] = $count;
+
+            $query = "SELECT COUNT(*) FROM comments WHERE post_id = :id AND status = 0";
+            $result = $this->db->prepare($query);
+            $result->bindValue(":id", $posts[$i]['id']);
+            $result->execute();
+            $count = $result->fetch();
+            $count = array_shift($count);
+            $posts[$i]['unapproved_comments'] = $count;
+        }
+        return $posts;
+    }
+
+
     public function getPosts($queryString = "")
     {
         if ($queryString == "") {
@@ -101,7 +132,7 @@ class Post extends ModelTemplate
             $result->bindValue(":id", $posts[$i]['id']);
             $result->execute();
             $count = $result->fetch();
-            $count =array_shift($count);
+            $count = array_shift($count);
             $posts[$i]['approved_comments'] = $count;
 
             $query = "SELECT COUNT(*) FROM comments WHERE post_id = :id AND status = 0";
@@ -109,7 +140,7 @@ class Post extends ModelTemplate
             $result->bindValue(":id", $posts[$i]['id']);
             $result->execute();
             $count = $result->fetch();
-            $count =array_shift($count);
+            $count = array_shift($count);
             $posts[$i]['unapproved_comments'] = $count;
         }
         return $posts;
