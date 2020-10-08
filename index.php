@@ -87,6 +87,7 @@ logo após vem um hifén e o valor do padding desejado. -->
 <section class="container">
     <div class="row">
         <div class="col-sm-8 ">
+            <?php if(isset($_POST['query'])) echo "<h1 class=\"display-3\">Resultado:</h1><br><br>";?>
             <?php for($i = 0;$i < $totalPostPerPage && $start < $totalPosts;$i++,$start++ ): ?>
                 <div class="card my-4">
                     <img class="image-fluid card-img-top post-header-img" src="<?php echo "./uploads/". $posts[$start]['image']?>" alt="">
@@ -114,6 +115,8 @@ logo após vem um hifén e o valor do padding desejado. -->
 
             <!--Dynamic pagination-->
             <?php if(!isset($_POST['query'])) echo showPages($page,$totalPages)?>
+
+            <?php if(isset($_POST['query'])) echo "<a class=\"btn btn-warning \" href=\"./index.php?page=1\">Voltar a página inicial.</a>";?>
         </div>
         <div class="col-sm-4 ">
 

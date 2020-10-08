@@ -3,6 +3,23 @@ a {
 }
 
 
+.dashboard-posts-border{
+    border-bottom: solid 10px #1dd85b ;
+}
+
+.dashboard-categories-border{
+    border-bottom: solid 10px #fde721 ;
+}
+
+.dashboard-admins-border{
+    border-bottom: solid 10px #ca3030 ;
+}
+
+.dashboard-comments-border{
+    border-bottom: solid 10px #1dd8af ;
+}
+
+
 .toggle-menu{
     color: #e0c52a;
 }
