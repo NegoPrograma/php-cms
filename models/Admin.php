@@ -48,12 +48,52 @@ class Admin extends ModelTemplate
         return $result->fetch();
     }
 
+    public function updateSession($id){
+        $query = "SELECT * FROM admins WHERE id = :id";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":id",$id);
+        $result->execute();
+        return $result->fetch();
+    }
 
+    public function updateAdmin($nick="",$job,$image="",$bio,$admin_id){
+        $query = "UPDATE admins SET nickname = :nick,
+         occupation = :job, 
+         bio = :bio, 
+         profile_image = :image 
+         WHERE id = :admin_id";
+        $result = $this->db->prepare($query);
+        if($image == "" && !file_exists("../uploads/".$admin_id.".png")){
+            $image = "default-user-image.png";
+        }else{
+            move_uploaded_file($_FILES['image']['tmp_name'],"../uploads/".$admin_id.".png");
+            $image = $admin_id.".png";
+        }
+        $result->bindValue(":nick",$nick);
+        $result->bindValue(":job",$job);
+        $result->bindValue(":bio",$bio);
+        $result->bindValue(":image",$image);
+        $result->bindValue(":admin_id",$admin_id);
+        return $result->execute();
+
+
+    }
+    
     public function getAdmins()
     {
         $query = "SELECT * FROM admins";
         $result = $this->db->query($query);
         return $result->fetchAll();
+    }
+
+
+    public function getAdmin($username)
+    {
+        $query = "SELECT * FROM admins WHERE username = :username";
+        $result = $this->db->prepare($query);
+        $result->bindValue(":username",$username);
+        $result->execute();
+        return $result->fetch();
     }
 
     public function checkDuplicateUsername($username)

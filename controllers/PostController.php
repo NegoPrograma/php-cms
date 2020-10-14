@@ -123,6 +123,8 @@ class PostController
         $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
         if (empty($this->postTitle))
             $errorHandler->addMessage("Não é permitido uma postagem sem título.");
+            if (empty($this->postCategory))
+            $errorHandler->addMessage("Não é permitido uma postagem sem categoria.");
         
         if (strlen($this->postTitle) < 10 || strlen($this->postTitle) > 99)
             $errorHandler->addMessage("O título da postagem deve conter de 10 até o máximo de 100 caractéres.");

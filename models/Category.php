@@ -40,7 +40,7 @@ class Category extends ModelTemplate
         $query .= "VALUES(:author,:category,:date)";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(":author", $author);
-        $stmt->bindValue(":category", $category);
+        $stmt->bindValue(":category", strtolower($category));
         $stmt->bindValue(":date", $date);
 
         $result = $stmt->execute();

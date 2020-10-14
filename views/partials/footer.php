@@ -18,5 +18,4 @@
 $("#year").text(new Date().getFullYear());
  </script>
 </body>
-
 </html>

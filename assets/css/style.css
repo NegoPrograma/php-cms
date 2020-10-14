@@ -2,6 +2,9 @@ a {
     color: #e0c52a;
 }
 
+body {
+    background-color: white;
+}
 
 .dashboard-posts-border{
     border-bottom: solid 10px #1dd85b ;
@@ -46,6 +49,13 @@ a {
     max-height: 300px;
 }
 
+.about-us-img{
+    width: 200px;
+    height: 200px;
+    border: solid #1dd85b 6px;
+    border-radius: 100%;
+}
+
 .push-footer{
-    margin-bottom:200px;
+    margin-bottom:400px;
 }

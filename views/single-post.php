@@ -33,12 +33,13 @@ else
 
                     <form class="form-inline" action="../" method="post">
                         <h3 class="card-title ">
-                            <?php echo $post['title']; ?> <button class="btn btn-info btn-small" name="query" value="<?php echo $post['category'];?>"><?php echo $post["category"]; ?></button>
+                            <?php echo $post['title']; ?> <a class="btn btn-info btn-small" href="./post-search-by-category.php?page=1&category=<?php echo $post['category'];?>"><?php echo $post['category'];?></a>
                         </h3>
                     </form>
-                    <small class="text-muted">Escrito por <?php echo $post['author'] . ", " . $post['datetime'] . "."; ?>
-
-                    </small>
+                    <p class="text-muted">Escrito por <a class="text-primary"href="profile.php?username=<?php echo $post['author']?>"><?php echo $post['author']?></a><?php echo ", ".$post['datetime'].".";?>
+                        
+            </p>
+     
 
                     <span class="badge post-card-badge"> Qtd. de comentários: <?php echo count($comments)?></span>
                 </div>
@@ -59,7 +60,7 @@ else
                         
                     </div>
                 </div>
-                <? endforeach;?>
+                <?php endforeach;?>
             </div>
 <!--COMMENT -->
 

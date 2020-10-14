@@ -21,6 +21,8 @@ $totalPosts = count($postsByCategory);
 
 $totalPages = ceil($totalPosts/$totalPostPerPage);
 
+
+
 if(isset($_GET['page'])){
     $page = $_GET['page'];
     if($page < 1 || !is_numeric($page))
@@ -45,7 +47,7 @@ function showPages($page,$totalPages,$category){
         // $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./post-search-by-category.php?page=1&category=$category\">3</a> ";
         // $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./post-search-by-category.php?page=1&category=$category\">4</a> ";
         // $result .= "<a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./post-search-by-category.php?page=1&category=$category\">5</a> ";
-    }else if($page > $totalPages){
+    }else if($page >= $totalPages){
             $result = "<h1>Página não existente.</h1>";
             $result .= "<a class=\"btn btn-warning \" href=\"./post-search-by-category.php?page=1&category=$category\">Voltar a página inicial.</a>";
             return $result;
@@ -58,8 +60,6 @@ function showPages($page,$totalPages,$category){
         if($page+2 <= $totalPages)
         $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./post-search-by-category.php?page=$max&category=$category\"> $max</a> ";
     }
-    if($page < $totalPages)
-        $result .=" <a class=\"btn btn-warning col-sm-1 ml-5 my-2 \" href=\"./post-search-by-category.php?page=$after&category=$category\"> >> </a> ";
     return $result;
 }
 
@@ -89,16 +89,16 @@ logo após vem um hifén e o valor do padding desejado. -->
                 <div class="card my-4">
                     <img class="image-fluid card-img-top post-header-img" src="<?php echo "../uploads/". $postsByCategory[$i]['image']?>" alt="">
                     <div class="card-header ">
-                    <? echo $postsByCategory[$i]['id']?>
+                    <?php echo $postsByCategory[$i]['id']?>
                     
                 <h3 class="card-title ">
                     <?php echo $postsByCategory[$i]['title'];?> 
                     <a class="btn btn-info btn-small" href="./post-search-by-category.php?page=1&category=<?php echo $postsByCategory[$i]['category'];?>"><?php echo $postsByCategory[$i]['category'];?></a>
                 </h3>
             </a>
-                        <small class="text-muted">Escrito por <?php echo $postsByCategory[$i]['author'].", ".$postsByCategory[$i]['datetime'].".";?>
+                        <p class="text-muted">Escrito por <a class="text-primary"href="profile.php?username=<?php echo $postsByCategory[$i]['author']?>"><?php echo $postsByCategory[$i]['author']?></a><?php echo ", ".$postsByCategory[$i]['datetime'].".";?>
                         
-                    </small>
+            </p>
      
                     <span class="badge post-card-badge"><?php echo $postsByCategory[$i]['approved_comments'];?> comentários</span>
                     </div>
@@ -107,7 +107,7 @@ logo após vem um hifén e o valor do padding desejado. -->
                         <a href="<?php echo './single-post.php?id='.$postsByCategory[$i]["id"];?>" class="btn btn-warning">Ler mais</a>
                     </div>
                 </div>
-            <? endfor; ?>
+            <?php endfor; ?>
 
 
             <!--Dynamic pagination-->
@@ -143,7 +143,7 @@ logo após vem um hifén e o valor do padding desejado. -->
                     <div class="card-body">
                     <?php foreach($categories as $category):?>
                         <a class="badge badge-primary" href="./post-search-by-category.php?page=1&category=<?php echo $category['name'];?>"><?php echo $category['name'];?></a>
-                        <?endforeach;?>
+                        <?php endforeach;?>
                     </div>
                 </div>
 
@@ -156,12 +156,12 @@ logo após vem um hifén e o valor do padding desejado. -->
                 <div class="media my-2">
                     <img src="<?php echo "../uploads/". $posts[$i]['image']?>" alt="" class="d-block img-fluid image-list-limit align-self-start">
                     <div class="media-body ml-2">
-                        <a href="<?php echo './single-post.php?id='.$posts[$i]["id"];?>" target="_blank" class="btn-link" ><? echo $posts[$i]['title']?>, </a>
-                        <small><? echo $posts[$i]['datetime']?></small>
+                        <a href="<?php echo './single-post.php?id='.$posts[$i]["id"];?>" target="_blank" class="btn-link" ><?php echo $posts[$i]['title']?>, </a>
+                        <small><?php echo $posts[$i]['datetime']?></small>
                     </div>
                 </div>
                 <hr>
-                <?endfor;?>
+                <?php endfor;?>
                     </div>
                 </div>
 

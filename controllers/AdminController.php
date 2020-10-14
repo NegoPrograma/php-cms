@@ -60,6 +60,20 @@ class AdminController
         $this->adminModel = new Admin();
         return $this->adminModel->getAdmins();
     }
+
+    public function getAdmin($username){
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        $this->adminModel = new Admin();
+        $result = $this->adminModel->getAdmin($username);
+        if(!isset($result['username'])){
+            $errorHandler->setSuccess(false);
+            $errorHandler->addMessage("Admin não encontrado.");
+            $errorHandler->renderResult();
+            exit;
+        }else{
+            return $result;
+        }
+    }
     public function login()
     {
         $this->adminModel = new Admin($this->username, $this->password);
@@ -88,6 +102,42 @@ class AdminController
             }
             $errorHandler->renderResult();
         }
+    }
+
+    function validateProfileEditing($nick = "", $job, $image = "", $bio, $admin_id)
+    {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+
+        if (strlen($job) < 3 || strlen($job) > 49)
+            $errorHandler->addMessage("Sua ocupação não pode ter menos que 3 caractéres e mais que 50 caractéres.");
+
+        if (strlen($bio) < 50 || strlen($bio) > 499)
+            $errorHandler->addMessage("Sua descrição não pode ter menos que 50 caractéres e mais que 500 caractéres.");
+
+        if (count($errorHandler->getMessages()) > 0) {
+            $errorHandler->setSuccess(false);
+            $this->validInput = false;
+            $errorHandler->renderResult();
+            return false;
+        } else {
+            $this->updateAdmin($nick, $job, $image, $bio, $admin_id);
+        }
+    }
+
+    private function updateAdmin($nick = "", $job, $image = "", $bio, $admin_id)
+    {
+        $errorHandler = new OperationResult($_SERVER['HTTP_REFERER']);
+        $this->adminModel = new Admin();
+        $result = $this->adminModel->updateAdmin($nick, $job, $image, $bio, $admin_id);
+        if ($result) {
+            $errorHandler->addMessage("Adminstrador atualizado com successo.");
+            //atualizando sessão atual 
+            $_SESSION['admin'] =$this->adminModel->updateSession($admin_id);
+        } else {
+            $errorHandler->addMessage("Erro ao salvar dados, tente novamente.");
+            $errorHandler->setSuccess(false);
+        }
+        $errorHandler->renderResult();
     }
 
     function validateAdmin()

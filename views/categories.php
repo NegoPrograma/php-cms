@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once("../vendor/autoload.php");
 include_once("../routes/getCategories.php");
 if (isset($_SESSION['admin']))
     include_once("partials/admin-header.php");
@@ -72,7 +73,7 @@ else {
                                 <a href="../routes/deleteCategory.php?id=<?php echo $category['id']?>" class="btn btn-block btn-danger">Deletar</a>
                             </td>
                     </tr>
-                <? endforeach;?>
+                <?php endforeach;?>
                 </tbody>
             </table>
         </div>

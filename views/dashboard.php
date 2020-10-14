@@ -110,7 +110,7 @@ if (count($posts) < $limit)
                             <td><?php echo $posts[$i]['category'] ?></td>
                             <td><?php echo $posts[$i]['datetime'] ?></td>
                             <td><?php echo $posts[$i]['author'] ?></td>
-                            <td><img class=" post-table-img " src="<?php echo "../uploads/" . $posts[$i]['image'] ?>" alt="imagem indisponível"></td>
+                            <td><img class=" post-table-img rounded-pill" src="<?php echo "../uploads/" . $posts[$i]['image'] ?>" alt="imagem indisponível"></td>
                             <td><span class="badge badge-success">aprovados: <?php echo $posts[$i]['approved_comments']?></span>
                             <span class="badge badge-danger">reprovados: <?php echo $posts[$i]['unapproved_comments']?></span></td>
                             <td>

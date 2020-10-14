@@ -29,9 +29,7 @@
                     <li class="nav-item">
                         <a href="/php-cms/views/contacts.php" class="nav-link">Contatos</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/php-cms/views/features.php" class="nav-link">Features</a>
-                    </li>
+                  
 
 
                 </ul>

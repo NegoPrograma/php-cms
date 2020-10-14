@@ -58,8 +58,6 @@ function showPages($page,$totalPages){
         if($page+2 <= $totalPages)
         $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./posts.php?page=$max\"> $max</a> ";
     }
-    if($page < $totalPages)
-        $result .=" <a class=\"btn btn-warning col-sm-1 ml-5 my-2 \" href=\"./posts.php?page=$after\"> >> </a> ";
     return $result;
 }
 
@@ -115,7 +113,7 @@ function showPages($page,$totalPages){
                             <td><?php echo $posts[$start]['category'] ?></td>
                             <td><?php echo $posts[$start]['datetime'] ?></td>
                             <td><?php echo $posts[$start]['author'] ?></td>
-                            <td><img class=" post-table-img " src="<?php echo "../uploads/" . $posts[$start]['image'] ?>" alt="imagem indisponível"></td>
+                            <td><img class=" post-table-img rounded-pill " src="<?php echo "../uploads/" . $posts[$start]['image'] ?>" alt="imagem indisponível"></td>
                             <td><span class="badge badge-success">Aprovados: <?php echo $posts[$start]['approved_comments'] ?></span>
                                 <span class="badge badge-danger">Ocultados: <?php echo $posts[$start]['unapproved_comments'] ?></span>
                             </td>

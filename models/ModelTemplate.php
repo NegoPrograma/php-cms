@@ -9,7 +9,7 @@ use \PDOException;
 class ModelTemplate
 {
 
-    protected PDO $db;
+    protected $db;
     function __construct()
     {
         $this->initDatabase();

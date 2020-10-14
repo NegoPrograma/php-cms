@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarcollapse">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a href="/php-cms/views/profile.php" class="nav-link"><i class="fa fa-user text-success"></i>Perfil</a>
+            <a href="/php-cms/views/edit-profile.php" class="nav-link"><i class="fa fa-user text-success"></i>Perfil</a>
         </li>
         <li class="nav-item">
             <a href="/php-cms/views/dashboard.php" class="nav-link">Quadro Adminstrativo</a>

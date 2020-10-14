@@ -5,9 +5,11 @@ if (session_status() != PHP_SESSION_ACTIVE)
     session_start();
 
 $adminController = new AdminController($_POST['username'],"",$_POST['password'],"");
-$_SESSION['admin'] = $adminController->login();
-if($_SESSION['admin']['username'] != null)
+$result = $adminController->login();
+if($result){
+    $_SESSION['admin'] = $result;
     header("location: ../index.php");
+}
 else
     $adminController->loginFailed();
 ?>

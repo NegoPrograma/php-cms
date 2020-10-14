@@ -16,8 +16,9 @@ include_once("./routes/getPosts.php");
 $totalPostPerPage = 5;
 $page=null;
 $totalPosts = count($posts);
-$totalPages = $totalPosts/$totalPostPerPage;
-$filter = [];
+$totalPages = ceil($totalPosts/$totalPostPerPage);
+
+
 if(isset($_POST['query'])){
     $totalPostPerPage = count($posts);
     
@@ -60,8 +61,6 @@ function showPages($page,$totalPages){
         if($page+2 <= $totalPages)
         $result .=" <a class=\"btn btn-warning col-sm-1 mx-1 my-2 \" href=\"./index.php?page=$max\"> $max</a> ";
     }
-    if($page < $totalPages)
-        $result .=" <a class=\"btn btn-warning col-sm-1 ml-5 my-2 \" href=\"./index.php?page=$after\"> >> </a> ";
     return $result;
 }
 
@@ -92,25 +91,25 @@ logo após vem um hifén e o valor do padding desejado. -->
                 <div class="card my-4">
                     <img class="image-fluid card-img-top post-header-img" src="<?php echo "./uploads/". $posts[$start]['image']?>" alt="">
                     <div class="card-header ">
-                    <? echo $posts[$start]['id']?>
+                    <?php echo $posts[$start]['id']?>
                     
                 <h3 class="card-title ">
                     <?php echo $posts[$start]['title'];?> 
                     <a class="btn btn-info btn-small" href="./views/post-search-by-category.php?page=1&category=<?php echo $posts[$start]['category'];?>"><?php echo $posts[$start]['category'];?></a>
                 </h3>
             </a>
-                        <small class="text-muted">Escrito por <?php echo $posts[$start]['author'].", ".$posts[$start]['datetime'].".";?>
+                        <p class="text-muted">Escrito por <a class="text-primary" href="views/profile.php?username=<?php echo $posts[$start]['author']?>"><?php echo $posts[$start]['author']?></a>, <?php echo$posts[$start]['datetime'].".";?>
                         
-                    </small>
+            </p>
      
                     <span class="badge post-card-badge"><?php echo $posts[$start]['approved_comments'];?> comentários</span>
                     </div>
                     <div class="card-body">
-                    <p class="card-text"><?php echo htmlentities(substr($posts[$start]['content'],0,100)."...");?></p>
+                    <p class="card-text"><?php echo htmlentities(substr($posts[$start]['content'],0,50)."...");?></p>
                         <a href="<?php echo './views/single-post.php?id='.$posts[$start]["id"];?>" class="btn btn-warning">Ler mais</a>
                     </div>
                 </div>
-            <? endfor; ?>
+            <?php endfor; ?>
 
 
             <!--Dynamic pagination-->
@@ -149,7 +148,7 @@ logo após vem um hifén e o valor do padding desejado. -->
                     <div class="card-body">
                     <?php foreach($categories as $category):?>
                         <a class="badge badge-primary" href="./views/post-search-by-category.php?page=1&category=<?php echo $category['name'];?>"><?php echo $category['name'];?></a>
-                        <?endforeach;?>
+                        <?php endforeach;?>
                     </div>
                 </div>
 
@@ -159,16 +158,16 @@ logo após vem um hifén e o valor do padding desejado. -->
                     </div>
                     <div class="card-body">
                         <?php if($recentPosts == []) $recentPosts = $posts;?>
-                    <?php for($i = 0; $i < 5; $i++): ?>
+                    <?php for($i = 0; $i < 5 && $i < count($recentPosts); $i++): ?>
                 <div class="media my-2">
-                    <img src="<?php echo "./uploads/". $recentPosts[$i]['image']?>" alt="" class="d-block img-fluid image-list-limit align-self-start">
+                    <img src="<?php echo "./uploads/". $recentPosts[$i]['image']?>" alt="" class="rounded-circle d-block img-fluid image-list-limit align-self-start">
                     <div class="media-body ml-2">
-                        <a href="<?php echo './views/single-post.php?id='.$recentPosts[$i]["id"];?>" target="_blank" class="btn-link" ><? echo $recentPosts[$i]['title']?>, </a>
-                        <small><? echo $recentPosts[$i]['datetime']?></small>
+                        <a href="<?php echo './views/single-post.php?id='.$recentPosts[$i]["id"];?>" target="_blank" class="btn-link" ><?php echo $recentPosts[$i]['title']?>, </a>
+                        <small><?php echo $recentPosts[$i]['datetime']?></small>
                     </div>
                 </div>
                 <hr>
-                <?endfor;?>
+                <?php endfor;?>
                     </div>
                 </div>
 
@@ -178,4 +177,4 @@ logo após vem um hifén e o valor do padding desejado. -->
 
 
 <!-- END CONTENT -->
-<?php include_once("views/partials/footer.php"); ?>
+<?php include("views/partials/footer.php"); ?>
