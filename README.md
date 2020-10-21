@@ -10,8 +10,8 @@
 
 Users can read posts and comment on it.
 
-![user commenting gif](https://media3.giphy.com/media/S8OVLexbD4p41NGnes/giphy.gif)
 
+<img src="https://media3.giphy.com/media/S8OVLexbD4p41NGnes/giphy.gif" alt="user_commenting_gif" width="800" height="600"/>
 
 Admins can approve and reject comments on their will.
 
@@ -22,7 +22,7 @@ Admins can approve and reject comments on their will.
 
 Quick tour on admin panel.
 
-![admin_panel_gif](https://media1.giphy.com/media/Xcn6t8eJfjV1OlA6x8/giphy.gif)
+<img src="https://media1.giphy.com/media/Xcn6t8eJfjV1OlA6x8/giphy.gif" alt="admin_panel_gif" width="800" height="600"/>
 
 
 
